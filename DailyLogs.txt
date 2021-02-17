@@ -6,3 +6,4 @@
 
 2/16/21
 Jorge: Researched different languages that can be used for web applications. Both front-end and back-end
+Michael: Researched how grocery delivery services work; looked into what technologies to are needed
