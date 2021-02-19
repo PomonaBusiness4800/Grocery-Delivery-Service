@@ -15,3 +15,4 @@ We will research the different combinations of technologies to figure out which 
 
 2/18/21
 Jorge: Researched more about development tools. Focused on Bootstrap, Django, and Python
+Michael:researched the two combinations of development tools. Prefer on using bootstrap, django, python. look up web hosting for next time
