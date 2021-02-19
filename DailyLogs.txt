@@ -21,3 +21,6 @@ Michael:researched the two combinations of development tools. Prefer on using bo
 Sisian: Researched more about technologies and find some to share with my team. I will search more about web hosting services. 
 Jackie: Research more about what development tools we should use. I will search about web hosting.
 William: researched about technologies. Look for web hostig services. 
+
+2/19/21
+Michael: decided on AWS. Research SRS examples to begin building SRS document
