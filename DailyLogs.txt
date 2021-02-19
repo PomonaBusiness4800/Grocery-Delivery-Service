@@ -1,18 +1,23 @@
 2/15/21-first meeting 
   Discuss what to research for next meeting: How does a grocery delivery service work? What technologies are needed
-  A website will be created by Sisian
+  A website will be created
   Next meeting we will discuss more about the project and what technologies we will use
   Also format a schedule for meeting for the week
 
 2/16/21
 Jorge: Researched different languages that can be used for web applications. Both front-end and back-end
 Michael: Researched how grocery delivery services work; looked into what technologies to are needed
-Sisian: Created website. I will research about technologies that we should use for our project. 
+Sisian: Created website. I will research technologies that we should use for our project.
+William: Reseach technologies that we need to use
+Jackie: Research languages and technologies which are needed to do the project
 
-2/17/21:
+2/17/21
 dicussed different combinations of technologies to use and whether to go the javascript route or python route
 We will research the different combinations of technologies to figure out which ones to all agree to use for next meeting
 
 2/18/21
 Jorge: Researched more about development tools. Focused on Bootstrap, Django, and Python
-Michael:researched the two combinations of development tools. Prefer on using bootstrap, django, python. look up web hosting for next time
+Michael:researched the two combinations of development tools. Prefer on using bootstrap, django, python. look up web hosting for next time.
+Sisian: Researched more about technologies and find some to share with my team. I will search more about web hosting services. 
+Jackie: Research more about what development tools we should use. I will search about web hosting.
+William: researched about technologies. Look for web hostig services. 
