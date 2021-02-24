@@ -33,3 +33,5 @@ Jorge: Began focusing on Functional Requirements section of SRS
 2/23/21
 Michael: Added to intended audience and look for more sections to add and refine srs document.
 Jorge: Wrote first draft of Functional Requirements section of SRS
+2/24/21
+Michael: Added scope to SRS. For next meeting gonna work on approach and connecting technologies together.
