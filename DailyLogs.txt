@@ -24,9 +24,12 @@ William: researched about technologies. Look for web hostig services.
 
 2/19/21
 Michael: decided on AWS. Research SRS examples to begin building SRS document
+Jorge: Looked at SRS examples
 
 2/22/21
 Michael: Created srs doc to work on. discusses which parts to work on. I will do intended audience
+Jorge: Began focusing on Functional Requirements section of SRS
 
 2/23/21
 Michael: Added to intended audience and look for more sections to add and refine srs document.
+Jorge: Wrote first draft of Functional Requirements section of SRS
