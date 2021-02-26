@@ -40,3 +40,5 @@ Sisian: Wrote some non-functional requirements. I will add more non-functional r
 Michael: Added scope to SRS. For next meeting gonna work on approach and connecting technologies together. 
 2/25/21
 Michael: Added approach to SRS, going to look into connecting technologies together for next week.
+2/26/21:
+Will look into mySQL and try to start up server. Will also try and connect technologies. Research EER and relational models
