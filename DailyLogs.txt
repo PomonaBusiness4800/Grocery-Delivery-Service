@@ -44,4 +44,10 @@ Michael: Added approach to SRS, going to look into connecting technologies toget
 Michael: Will look into mySQL and try to start up server. Will also try and connect technologies. Research EER and relational models
 3/1/21
 Michael: Set up mysql with django and AWS hosting for the database. Will start adding entities and attributes to doc for tomorrow.
+3/2/21
+Michael: Use entities to create EER model and relational models.
+3/3/21: 
+Michael: Will use the models to create the tables in the database.
+3/4/21
+Michael: The tables are created in the database. Mock data will be created for the tables.
 
