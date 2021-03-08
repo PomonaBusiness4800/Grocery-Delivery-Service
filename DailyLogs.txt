@@ -50,4 +50,8 @@ Michael: Use entities to create EER model and relational models.
 Michael: Will use the models to create the tables in the database.
 3/4/21
 Michael: The tables are created in the database. Mock data will be created for the tables.
+3/5/21
+Michael: Adding data into databse to make it look better.
+3/8/21
+Michael: continue to add data into database. Will upload framework code to simulate web service on github.
 
