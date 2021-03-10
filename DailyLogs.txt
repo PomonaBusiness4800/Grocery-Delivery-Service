@@ -54,4 +54,5 @@ Michael: The tables are created in the database. Mock data will be created for t
 Michael: Adding data into databse to make it look better.
 3/8/21
 Michael: continue to add data into database. Will upload framework code to simulate web service on github.
-
+3/9/21
+Michael: Added code for framework onto github and showed how to run it on virtual environment. For next meeting, will look into how to pull data from the databases onto the webpage
