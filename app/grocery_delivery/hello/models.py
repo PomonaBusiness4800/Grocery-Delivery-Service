@@ -96,6 +96,8 @@ class Deliverydriver(models.Model):
     carmodel = models.CharField(db_column='carModel', max_length=45)  # Field name made lowercase.
     licenseplate = models.CharField(db_column='licensePlate', max_length=45)  # Field name made lowercase.
 
+    def __str__(self):
+        return self.driverfirstname + ' ' + self.driverlastname + ' id: ' + str(self.driverid)
     class Meta:
         managed = False
         db_table = 'deliveryDriver'
@@ -177,7 +179,8 @@ class Grocerystoreadd(models.Model):
     city = models.CharField(max_length=45)
     zipcode = models.IntegerField(db_column='zipCode')  # Field name made lowercase.
     state = models.CharField(max_length=45)
-
+    def __str__(self):
+        return str(self.storeaddressid)
     class Meta:
         managed = False
         db_table = 'groceryStoreAdd'

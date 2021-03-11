@@ -22,6 +22,16 @@
         Email: {{ item.emailaddress }}<br/><br/>
         <hr style="width: 50%">
     {% endfor %}
+    <strong>User addresses:</strong> <br/>
+    {%for item in addresses %}
+        address ID: {{ item.useraddressid }} <br/>
+        for user: {{ item.user_userid }} <br/>
+        street address: {{ item.streetaddress }}<br/>
+        city: {{ item.city }}<br/>
+        zipcode: {{ item.zipcode }}<br/>
+        state: {{ item.state }}<br/><br/>
+        <hr style="width: 50%">
+    {% endfor %}
     <strong>User payment info:</strong> <br/>
     {%for item in paymentInfo %}
         payment info id: {{ item.paymentid }} <br/>
@@ -37,6 +47,24 @@
         store name: {{ item.storename }} <br/>
         store ID: {{ item.storeid }}<br/>
         <p> description: {{ item.description }}<br/><br/> </p>
+        <hr style="width: 50%">
+    {% endfor %}
+    <strong>Store addresses:</strong> <br/>
+    {%for item in groceryaddresses %}
+        store addresss ID: {{ item.storeaddressid }} <br/>
+        store addresss: {{ item.streetaddress }} <br/>
+        city: {{ item.city }} <br/>
+        zipcode: {{ item.zipcode }} <br/>
+        state: {{ item.state }}<br/><br/>
+        <hr style="width: 50%">
+    {% endfor %}
+    <strong>delivery drivers:</strong> <br/>
+    {%for item in drivers %}
+        driver ID: {{ item.driverid }} <br/>
+        first name: {{ item.driverfirstname }} <br/>
+        last name: {{ item.driverlastname }}<br/>
+        car model: {{ item.carmodel }}<br/>
+        license plate: {{ item.licenseplate }}<br/><br/>
         <hr style="width: 50%">
     {% endfor %}
     <!-- Optional JavaScript -->
