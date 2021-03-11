@@ -1,5 +1,7 @@
 from django.shortcuts import render
-
+from .models import User
 def index(request):
-    return render(request, 'hello/index.html')
+    all_users = User.objects.all
+    return render(request, 'hello/index.html', {'allUsers':all_users})
+
 # Create your views here.

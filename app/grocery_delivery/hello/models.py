@@ -9,7 +9,7 @@ from django.db import models
 
 
 class Address(models.Model):
-    idaddress = models.AutoField(primary_key=True)
+    useraddressid = models.AutoField(db_column='userAddressID', primary_key=True)  # Field name made lowercase.
     user_userid = models.ForeignKey('User', models.DO_NOTHING, db_column='user_userID')  # Field name made lowercase.
     firstname = models.CharField(db_column='firstName', max_length=45)  # Field name made lowercase.
     lastname = models.CharField(db_column='lastName', max_length=45)  # Field name made lowercase.
@@ -147,13 +147,13 @@ class DjangoSession(models.Model):
 
 class Groceryitem(models.Model):
     groceryid = models.AutoField(db_column='groceryID', primary_key=True)  # Field name made lowercase.
-    grocerystore_grocerystoreid = models.ForeignKey('Grocerystore', models.DO_NOTHING, db_column='groceryStore_groceryStoreID')  # Field name made lowercase.
+    grocerystore_storeid = models.ForeignKey('Grocerystore', models.DO_NOTHING, db_column='groceryStore_storeID')  # Field name made lowercase.
     groceryname = models.CharField(db_column='groceryName', max_length=45)  # Field name made lowercase.
     category = models.CharField(max_length=45)
-    price = models.CharField(max_length=45)
+    price = models.FloatField()
     brand = models.CharField(max_length=45)
-    description = models.CharField(max_length=45)
-    stock = models.CharField(max_length=45)
+    description = models.CharField(max_length=100)
+    stock = models.IntegerField()
 
     class Meta:
         managed = False
@@ -161,8 +161,8 @@ class Groceryitem(models.Model):
 
 
 class Grocerystore(models.Model):
-    idgrocerystore = models.AutoField(db_column='idgroceryStore', primary_key=True)  # Field name made lowercase.
-    grocerystoreadd_groceryaddressid = models.ForeignKey('Grocerystoreadd', models.DO_NOTHING, db_column='groceryStoreAdd_groceryAddressID')  # Field name made lowercase.
+    storeid = models.AutoField(db_column='storeID', primary_key=True)  # Field name made lowercase.
+    grocerystoreadd_storeaddressid = models.ForeignKey('Grocerystoreadd', models.DO_NOTHING, db_column='groceryStoreAdd_storeAddressID')  # Field name made lowercase.
     storename = models.CharField(db_column='storeName', max_length=45)  # Field name made lowercase.
     description = models.CharField(max_length=45)
 
@@ -172,7 +172,7 @@ class Grocerystore(models.Model):
 
 
 class Grocerystoreadd(models.Model):
-    groceryaddressid = models.AutoField(db_column='groceryAddressID', primary_key=True)  # Field name made lowercase.
+    storeaddressid = models.AutoField(db_column='storeAddressID', primary_key=True)  # Field name made lowercase.
     streetaddress = models.CharField(db_column='streetAddress', max_length=45)  # Field name made lowercase.
     city = models.CharField(max_length=45)
     zipcode = models.IntegerField(db_column='zipCode')  # Field name made lowercase.
@@ -184,8 +184,8 @@ class Grocerystoreadd(models.Model):
 
 
 class Orderstatus(models.Model):
-    idorderstatus = models.AutoField(db_column='idorderStatus', primary_key=True)  # Field name made lowercase.
-    purchaseinfo_idpurchaseinfo = models.ForeignKey('Purchaseinfo', models.DO_NOTHING, db_column='purchaseInfo_idpurchaseInfo')  # Field name made lowercase.
+    orderstatusid = models.AutoField(db_column='orderStatusID', primary_key=True)  # Field name made lowercase.
+    purchaseinfo_purchaseid = models.ForeignKey('Purchaseinfo', models.DO_NOTHING, db_column='purchaseInfo_purchaseID')  # Field name made lowercase.
     deliverydriver_driverid = models.ForeignKey(Deliverydriver, models.DO_NOTHING, db_column='deliveryDriver_driverID')  # Field name made lowercase.
     status = models.CharField(max_length=45)
 
@@ -195,11 +195,11 @@ class Orderstatus(models.Model):
 
 
 class Purchaseinfo(models.Model):
-    idpurchaseinfo = models.AutoField(db_column='idpurchaseInfo', primary_key=True)  # Field name made lowercase.
+    purchaseid = models.AutoField(db_column='purchaseID', primary_key=True)  # Field name made lowercase.
     userpaymentinfo_paymentid = models.ForeignKey('Userpaymentinfo', models.DO_NOTHING, db_column='userPaymentInfo_paymentID')  # Field name made lowercase.
-    grocerystore_idgrocerystore = models.ForeignKey(Grocerystore, models.DO_NOTHING, db_column='groceryStore_idgroceryStore')  # Field name made lowercase.
-    totalprice = models.CharField(db_column='totalPrice', max_length=45)  # Field name made lowercase.
-    totalitems = models.CharField(db_column='totalItems', max_length=45)  # Field name made lowercase.
+    grocerystore_storeid = models.ForeignKey(Grocerystore, models.DO_NOTHING, db_column='groceryStore_storeID')  # Field name made lowercase.
+    totalprice = models.FloatField(db_column='totalPrice')  # Field name made lowercase.
+    totalitems = models.IntegerField(db_column='totalItems')  # Field name made lowercase.
     date = models.CharField(max_length=45)
     time = models.CharField(max_length=45)
 
@@ -215,9 +215,10 @@ class User(models.Model):
     firstname = models.CharField(max_length=45)
     lastname = models.CharField(max_length=45)
     emailaddress = models.CharField(max_length=45)
-    def __str__ (self):
-        return self.firstname + ' ' + self.lastname
     
+    def __str__(self):
+        return self.firstname + ' ' + self.lastname
+
     class Meta:
         managed = False
         db_table = 'user'
