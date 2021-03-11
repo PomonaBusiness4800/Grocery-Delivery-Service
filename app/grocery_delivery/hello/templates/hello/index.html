@@ -22,6 +22,23 @@
         Email: {{ item.emailaddress }}<br/><br/>
         <hr style="width: 50%">
     {% endfor %}
+    <strong>User payment info:</strong> <br/>
+    {%for item in paymentInfo %}
+        payment info id: {{ item.paymentid }} <br/>
+        user ID: {{ item.user_userid }}<br/>
+        cardnumber: {{ item.cardnumber }}<br/>
+        security number: {{ item.securitynumber }}<br/>
+        expiration date: {{ item.expirationdate }}<br/>
+        zipcode: {{ item.zipcode }}<br/><br/> 
+        <hr style="width: 50%">
+    {% endfor %}
+    <strong>Stores:</strong> <br/>
+    {%for item in stores %}
+        store name: {{ item.storename }} <br/>
+        store ID: {{ item.storeid }}<br/>
+        <p> description: {{ item.description }}<br/><br/> </p>
+        <hr style="width: 50%">
+    {% endfor %}
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -217,7 +217,7 @@ class User(models.Model):
     emailaddress = models.CharField(max_length=45)
     
     def __str__(self):
-        return self.firstname + ' ' + self.lastname
+        return self.firstname + ' ' + self.lastname + ' id: ' + str(self.userid)
 
     class Meta:
         managed = False
