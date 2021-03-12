@@ -56,3 +56,7 @@ Michael: Adding data into databse to make it look better.
 Michael: continue to add data into database. Will upload framework code to simulate web service on github.
 3/9/21
 Michael: Added code for framework onto github and showed how to run it on virtual environment. For next meeting, will look into how to pull data from the databases onto the webpage
+3/10/21
+Michael: Pulled data from database onto website html page. look into Connecting full stack development onto AWS web service for tomorrow.
+3/11/21
+Michael: Pull rest of data onto webpage. Connect full stack to AWS.
