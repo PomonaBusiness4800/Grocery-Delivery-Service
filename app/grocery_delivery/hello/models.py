@@ -167,7 +167,10 @@ class Grocerystore(models.Model):
     grocerystoreadd_storeaddressid = models.ForeignKey('Grocerystoreadd', models.DO_NOTHING, db_column='groceryStoreAdd_storeAddressID')  # Field name made lowercase.
     storename = models.CharField(db_column='storeName', max_length=45)  # Field name made lowercase.
     description = models.CharField(max_length=45)
-
+    def __str__(self):
+        return 'store ID: ' + str(self.storeid) + ' store name: ' + self.storename
+    
+    
     class Meta:
         managed = False
         db_table = 'groceryStore'

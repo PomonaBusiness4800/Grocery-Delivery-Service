@@ -58,6 +58,18 @@
         state: {{ item.state }}<br/><br/>
         <hr style="width: 50%">
     {% endfor %}
+    <strong>Store items:</strong> <br/>
+    {%for item in groceryitem %}
+        item ID: {{ item.groceryid }} <br/>
+        store addresss ID : {{ item.grocerystore_storeid }} <br/>
+        item name: {{ item.groceryname }} <br/>
+        category: {{ item.category }} <br/>
+        price: {{ item.price }}<br/>
+        brand: {{ item.brand }}<br/>
+        stock: {{ item.stock }}<br/>
+        <p>description: {{ item.description }}<br/><br/></p>
+        <hr style="width: 50%">
+    {% endfor %}
     <strong>delivery drivers:</strong> <br/>
     {%for item in drivers %}
         driver ID: {{ item.driverid }} <br/>
