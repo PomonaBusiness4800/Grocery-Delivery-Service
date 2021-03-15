@@ -15,5 +15,6 @@ def index(request):
     all_grocstoreaddresses = Grocerystoreadd.objects.all
     all_groceryitem = Groceryitem.objects.all
     return render(request, 'hello/index.html', {'allUsers':all_users,'stores':all_stores, 'paymentInfo':all_payinfo, 'addresses':all_addresses,'drivers':all_drivers,'groceryaddresses':all_grocstoreaddresses, 'groceryitem': all_groceryitem})
-
+def storeview(request):
+    return render(request, 'hello/storeview.html',{})
 # Create your views here.
