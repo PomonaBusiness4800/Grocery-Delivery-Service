@@ -60,5 +60,10 @@ Michael: Added code for framework onto github and showed how to run it on virtua
 Michael: Pulled data from database onto website html page. look into Connecting full stack development onto AWS web service for tomorrow.
 3/11/21
 Michael: Pull rest of data onto webpage. Connect full stack to AWS.
+3/12/21:
+Michael: research more HTML for store view
+3/15/21:
+Michael: work on ccount creation for users, store view html creations.
+3/17/21: no meeting
 3/12/2021
 Michael: mock up store view, look into some HTML. AWS is trash switching to heroku
