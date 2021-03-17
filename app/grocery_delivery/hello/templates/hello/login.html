@@ -1,0 +1,32 @@
+{% extends 'hello/base.html' %}
+
+{% block content %}
+    <h1>Login</h1>
+    <br/><br/>
+    <hr/>
+    <br/><br/>
+    <div style="text-align: center; align-content: center; background-color: aquamarine; border-radius: 10px; padding: 25px">
+        <form method="POST" action="" class="row g-3 justify-content-start">
+            {%csrf_token%}
+            <div class="col-6">
+                <label class="form-label">Enter Username</label>
+            </div>
+            <div class="col-3">
+                <input type="text" class="form-control" name="username" placeholder="Username...">
+            </div>
+            <div class="col-6">
+                <label class="form-label">Enter Password</label>
+            </div>
+            <div class="col-3">
+                <input type="password" class="form-control" name="password" placeholder="Password...">
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>  
+        </form>
+        {% for message in messages %}
+            <p id="message"> {{message}} </p>
+        {% endfor %}
+    </div>
+
+{% endblock %}
