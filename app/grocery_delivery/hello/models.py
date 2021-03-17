@@ -226,7 +226,6 @@ class User(models.Model):
         return self.firstname + ' ' + self.lastname + ' id: ' + str(self.userid)
 
     class Meta:
-        managed = False
         db_table = 'user'
 
 

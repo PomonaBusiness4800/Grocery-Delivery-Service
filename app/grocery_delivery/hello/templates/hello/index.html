@@ -17,6 +17,17 @@
     </div>
     <div style="text-align: center">
         <a href="storeview" target="_self">Store view</a>
+        <br/>
+        <a href="login" target="_self">Login/create account</a>
+    </div>
+    <div class="container">
+        <strong>Users:</strong> <br/>
+        {%for item in allUsers %}
+        Username: {{ item.username }} <br/>
+        Name: {{ item.firstname }} {{item.lastname}}<br/>
+        Email: {{ item.emailaddress }}<br/><br/>
+        <hr style="width: 50%">
+    {% endfor %}
     </div>
     <!-- Optional JavaScript; choose one of the two! -->
 

@@ -1,0 +1,28 @@
+{% extends 'hello/base.html' %}
+
+{% block content %}
+    <h1>Create Your account below</h1>
+    <br/><br/><br/>
+    <form class="row g-3" method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="col-12">
+            <input type="text" class="form-control"  placeholder="Username" name="username">
+        </div>
+        <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="First Name" name="firstname">
+        </div>
+        <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Last name" name="lastname">
+        </div>
+        <div class="col-md-6">
+            <input type="email" class="form-control" id="inputEmail4" placeholder="Email Address" name="emailaddress">
+        </div>
+        <div class="col-md-6">
+            <input type="password" class="form-control" id="inputPassword4" placeholder="Password" name="password">
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </div>
+    </form>
+
+{% endblock %}
