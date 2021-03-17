@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import User
 from .models import Grocerystore
 from .models import Userpaymentinfo
@@ -6,7 +6,10 @@ from .models import Address
 from .models import Deliverydriver
 from .models import Grocerystoreadd
 from .models import Groceryitem
-from .forms import UserForm
+from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
+from .forms import CreateUserForm
+
 def index(request):
     all_stores = Grocerystore.objects.all
     all_users = User.objects.all
@@ -18,12 +21,13 @@ def index(request):
     return render(request, 'hello/index.html', {'allUsers':all_users,'stores':all_stores, 'paymentInfo':all_payinfo, 'addresses':all_addresses,'drivers':all_drivers,'groceryaddresses':all_grocstoreaddresses, 'groceryitem': all_groceryitem})
 def storeview(request):
     return render(request, 'hello/storeview.html',{})
-def login(request):
+def register(request):
+    form = CreateUserForm()
     if request.method == "POST":
-        form = UserForm(request.POST or None)
+        form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
-        return render(request, 'hello/login.html',{}) #can redirect to a new page
-    else:
-        return render(request, 'hello/login.html',{})
+        
+    context = {'form': form}
+    return render(request, 'hello/register.html', context)
 # Create your views here.
