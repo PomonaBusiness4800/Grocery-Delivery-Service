@@ -1,7 +1,27 @@
 {% extends 'hello/base.html' %}
+{% load static %}
 
 {% block content %}
-
-        store contents
-
+        <center> 
+        <h1> Store Contents </h1>
+        </center>
+        {% for item in items %}
+                {% if item.getStoreID == 1 %}
+                        <div class="item_image">
+                                <img src="{% static 'hello/images/1.jpg' %}">
+                        </div>
+                        {{ item.getGroceryName }} </br>
+                        Brand: {{ item.getBrand }}
+                        Category: {{ item.getCategory }} </br>
+                        Price: ${{ item.getPrice }} </br>
+                        {% if item.getStock > 10 %}
+                                Stock: 10+ </br>
+                        {% elif item.getStock <= 0 %}
+                                Out of Stock! </br>
+                        {% else %}
+                                Stock: {{item.getStock}} </br>
+                        {% endif %}
+                {% endif %} </br>
+        {% endfor %}
+        </center>
 {% endblock %}

@@ -10,7 +10,7 @@ from django.db import models
 
 class Address(models.Model):
     useraddressid = models.AutoField(db_column='userAddressID', primary_key=True)  # Field name made lowercase.
-    user_userid = models.ForeignKey('User', models.DO_NOTHING, db_column='user_userID')  # Field name made lowercase.
+    auth_user = models.ForeignKey('AuthUser', models.DO_NOTHING)
     firstname = models.CharField(db_column='firstName', max_length=45)  # Field name made lowercase.
     lastname = models.CharField(db_column='lastName', max_length=45)  # Field name made lowercase.
     streetaddress = models.CharField(db_column='streetAddress', max_length=45)  # Field name made lowercase.
@@ -96,8 +96,6 @@ class Deliverydriver(models.Model):
     carmodel = models.CharField(db_column='carModel', max_length=45)  # Field name made lowercase.
     licenseplate = models.CharField(db_column='licensePlate', max_length=45)  # Field name made lowercase.
 
-    def __str__(self):
-        return self.driverfirstname + ' ' + self.driverlastname + ' id: ' + str(self.driverid)
     class Meta:
         managed = False
         db_table = 'deliveryDriver'
@@ -167,10 +165,7 @@ class Grocerystore(models.Model):
     grocerystoreadd_storeaddressid = models.ForeignKey('Grocerystoreadd', models.DO_NOTHING, db_column='groceryStoreAdd_storeAddressID')  # Field name made lowercase.
     storename = models.CharField(db_column='storeName', max_length=45)  # Field name made lowercase.
     description = models.CharField(max_length=45)
-    def __str__(self):
-        return 'store ID: ' + str(self.storeid) + ' store name: ' + self.storename
-    
-    
+
     class Meta:
         managed = False
         db_table = 'groceryStore'
@@ -182,8 +177,7 @@ class Grocerystoreadd(models.Model):
     city = models.CharField(max_length=45)
     zipcode = models.IntegerField(db_column='zipCode')  # Field name made lowercase.
     state = models.CharField(max_length=45)
-    def __str__(self):
-        return str(self.storeaddressid)
+
     class Meta:
         managed = False
         db_table = 'groceryStoreAdd'
@@ -214,25 +208,9 @@ class Purchaseinfo(models.Model):
         db_table = 'purchaseInfo'
 
 
-class User(models.Model):
-    userid = models.AutoField(db_column='userID', primary_key=True)  # Field name made lowercase.
-    username = models.CharField(max_length=255)
-    password = models.CharField(max_length=32)
-    firstname = models.CharField(max_length=45)
-    lastname = models.CharField(max_length=45)
-    emailaddress = models.CharField(max_length=45)
-    
-    def __str__(self):
-        return self.firstname + ' ' + self.lastname + ' id: ' + str(self.userid)
-
-    class Meta:
-        managed = False
-        db_table = 'user'
-
-
 class Userpaymentinfo(models.Model):
     paymentid = models.AutoField(db_column='paymentID', primary_key=True)  # Field name made lowercase.
-    user_userid = models.ForeignKey(User, models.DO_NOTHING, db_column='user_userID')  # Field name made lowercase.
+    auth_user = models.ForeignKey(AuthUser, models.DO_NOTHING)
     cardnumber = models.CharField(max_length=16)
     securitynumber = models.IntegerField()
     expirationdate = models.CharField(db_column='expirationDate', max_length=10)  # Field name made lowercase.
