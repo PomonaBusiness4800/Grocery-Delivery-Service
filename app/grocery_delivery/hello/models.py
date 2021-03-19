@@ -17,7 +17,15 @@ class Address(models.Model):
     city = models.CharField(max_length=45)
     zipcode = models.IntegerField(db_column='zipCode')  # Field name made lowercase.
     state = models.CharField(max_length=45)
-
+    def getUserAddressID(self): return self.useraddressid
+    def getUserID(self): return self.user_userid.getUserID()
+    def getUserInfo(self): return self.user_userid
+    def getFirstName(self): return self.firstname
+    def getLastName(self): return self.lastname
+    def getStreetAddress(self): return self.streetaddress
+    def getCity(self): return self.city
+    def getZipCode(self): return self.zipcode
+    def getState(self): return self.state
     class Meta:
         managed = False
         db_table = 'address'
@@ -95,7 +103,11 @@ class Deliverydriver(models.Model):
     driverlastname = models.CharField(db_column='driverLastName', max_length=45)  # Field name made lowercase.
     carmodel = models.CharField(db_column='carModel', max_length=45)  # Field name made lowercase.
     licenseplate = models.CharField(db_column='licensePlate', max_length=45)  # Field name made lowercase.
-
+    def getDriverID(self): return self.driverid
+    def getDriverFirstName(self): return self.driverfirstname
+    def getDriverLastName(self): return self.driverlastname
+    def getCarModel(self): return self.carmodel
+    def getLicensePlate(self): return self.licenseplate
     class Meta:
         managed = False
         db_table = 'deliveryDriver'
@@ -154,7 +166,16 @@ class Groceryitem(models.Model):
     brand = models.CharField(max_length=45)
     description = models.CharField(max_length=100)
     stock = models.IntegerField()
-
+    def getGroceryID(self): return self.groceryid
+    def getStrGroceryID(self): return str(self.groceryid)
+    def getStoreID(self): return self.grocerystore_storeid.getStoreID()
+    def getStoreInfo(self): return self.grocerystore_storeid
+    def getGroceryName(self): return self.groceryname
+    def getCategory(self): return self.category
+    def getPrice(self): return self.price 
+    def getBrand(self): return self.brand
+    def getDescription(self): return self.description
+    def getStock(self): return self.stock
     class Meta:
         managed = False
         db_table = 'groceryItem'
@@ -165,7 +186,13 @@ class Grocerystore(models.Model):
     grocerystoreadd_storeaddressid = models.ForeignKey('Grocerystoreadd', models.DO_NOTHING, db_column='groceryStoreAdd_storeAddressID')  # Field name made lowercase.
     storename = models.CharField(db_column='storeName', max_length=45)  # Field name made lowercase.
     description = models.CharField(max_length=45)
-
+    def getStoreID(self): return self.storeid
+    def getAddressID(self): return self.grocerystoreadd_storeaddressid.getStoreAddressID()
+    def getAddressInfo(self): return self.grocerystoreadd_storeaddressid
+    def getStoreName(self): return self.storename
+    def getDescription(self): return self.description
+    def __str__(self):
+        return 'store ID: ' + str(self.storeid) + ' store name: ' + self.storename
     class Meta:
         managed = False
         db_table = 'groceryStore'
@@ -177,7 +204,13 @@ class Grocerystoreadd(models.Model):
     city = models.CharField(max_length=45)
     zipcode = models.IntegerField(db_column='zipCode')  # Field name made lowercase.
     state = models.CharField(max_length=45)
-
+    def getStoreAddressID(self): return self.storeaddressid
+    def getStreet(self): return self.streetaddress
+    def getCity(self): return self.city
+    def getZipCode(self): return self.zipcode
+    def getState(self): return self.state
+    def __str__(self):
+        return self.streetaddress + ' ' + self.city + ' ' + self.zipcode + ' ' + self.state
     class Meta:
         managed = False
         db_table = 'groceryStoreAdd'
@@ -188,7 +221,15 @@ class Orderstatus(models.Model):
     purchaseinfo_purchaseid = models.ForeignKey('Purchaseinfo', models.DO_NOTHING, db_column='purchaseInfo_purchaseID')  # Field name made lowercase.
     deliverydriver_driverid = models.ForeignKey(Deliverydriver, models.DO_NOTHING, db_column='deliveryDriver_driverID')  # Field name made lowercase.
     status = models.CharField(max_length=45)
+    def getOrderStatusID(self): return self.orderstatusid
+    def getPurchaseInfoID(self): return self.purchaseinfo_purchaseid.getPurchaseInfoID()
+    def getPurchaseInfo(self): return self.purchaseinfo_purchaseid
+    def getDeliveryDriverID(self): return self.deliverydriver_driverid.getDriverID()
+    def getDeliverDriverInfo(self): return self.deliverydriver_driverid
+    def getStatus(self): return self.status
 
+    def __str__(self):
+        return 'Order ID: ' + self.orderstatusid + '\nDelivery Driver: ' + self.getDeliverDriverInfo() + '\nStatus: ' + self.status
     class Meta:
         managed = False
         db_table = 'orderStatus'
@@ -202,7 +243,18 @@ class Purchaseinfo(models.Model):
     totalitems = models.IntegerField(db_column='totalItems')  # Field name made lowercase.
     date = models.CharField(max_length=45)
     time = models.CharField(max_length=45)
+    def getPurchaseID(self): return self.purchaseid
+    def getUserPaymentInfoID(self): return self.userpaymentinfo_paymentid.getUserPaymentInfoID()
+    def getUserPaymentInfo(self): return self.userpaymentinfo_paymentid
+    def getStoreID(self): return self.grocerystore_storeid.getStoreID()
+    def getStoreInfo(self): return self.grocerystore_storeid
+    def getTotalPrice(self): return self.totalprice
+    def getTotalItems(self): return self.totalitems
+    def getDate(self): return self.date
+    def getTime(self): return self.time
 
+    def __str__(self):
+        return 'Total Items Bought: ' + self.totalitems + '\nTotal Price: ' + self.totalprice + '\nTime of Purchase: ' + self.date + ' ' + self.time
     class Meta:
         managed = False
         db_table = 'purchaseInfo'
@@ -215,7 +267,16 @@ class Userpaymentinfo(models.Model):
     securitynumber = models.IntegerField()
     expirationdate = models.CharField(db_column='expirationDate', max_length=10)  # Field name made lowercase.
     zipcode = models.IntegerField()
+    def getPaymentID(self): return self.paymentid
+    def getUserID(self): return self.user_userid.getUserID()
+    def getUserInfo(self): return self.user_userid
+    def getCardNumber(self): return self.cardnumber
+    def getSecurityNumber(self): return self.securitynumber
+    def getExpirationDate(self): return self.expirationdate
+    def getZipCode(self): return self.zipcode
 
+    def __str__(self):
+        return self.user_userid + '\nCard Number: ' + self.cardnumber + ' Security Number: ' + self.securitynumber + '\nExpiration Date: ' + self.expirationdate + ' Zipcode: ' + self.zipcode
     class Meta:
         managed = False
         db_table = 'userPaymentInfo'

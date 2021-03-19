@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User, Grocerystore, Userpaymentinfo, Address, Deliverydriver, Grocerystoreadd, Groceryitem
+from .models import Grocerystore, Userpaymentinfo, Address, Deliverydriver, Grocerystoreadd, Groceryitem
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm
@@ -8,20 +8,18 @@ from django.contrib.auth.decorators import login_required
 
 def index(request):
     all_stores = Grocerystore.objects.all
-    all_users = User.objects.all
     all_payinfo = Userpaymentinfo.objects.all
     all_addresses = Address.objects.all
     all_drivers = Deliverydriver.objects.all
     all_grocstoreaddresses = Grocerystoreadd.objects.all
     all_groceryitem = Groceryitem.objects.all
-    return render(request, 'hello/index.html', {'allUsers':all_users,'stores':all_stores, 'paymentInfo':all_payinfo, 'addresses':all_addresses,'drivers':all_drivers,'groceryaddresses':all_grocstoreaddresses, 'groceryitem': all_groceryitem})
+    return render(request, 'hello/index.html', {'stores':all_stores, 'paymentInfo':all_payinfo, 'addresses':all_addresses,'drivers':all_drivers,'groceryaddresses':all_grocstoreaddresses, 'groceryitem': all_groceryitem})
 
 def storeview(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all
     return render(request, 'hello/storeview.html', {'stores':all_stores, 'items':all_items})
 @login_required(login_url='loginPage') # only logged in users can see this page
-
 def storelist(request):
     return render(request, 'hello/storelist.html',{})
 
