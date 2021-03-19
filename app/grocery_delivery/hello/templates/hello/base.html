@@ -1,11 +1,14 @@
 <!doctype html>
 <html lang="en">
-  <head>
+    <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>InstaBasket</title>
 
     <!-- Bootstrap CSS -->
+<<<<<<< Updated upstream
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <title>InstaBasket</title>
   </head>
@@ -15,9 +18,22 @@
     </style>
 <body>
     <div>
+=======
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    {% block css %}
+    {% endblock %}
+    <title>InstaBasket</title>
+    </head>
+    <style>
+        {% block style %}
+        {% endblock %}
+    </style>
+<body>
+    
+>>>>>>> Stashed changes
         {% block content %}
         {% endblock %}
-    </div>
+    
     
     <!-- Optional JavaScript; choose one of the two! -->
 

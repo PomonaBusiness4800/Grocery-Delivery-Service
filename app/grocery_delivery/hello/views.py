@@ -19,6 +19,7 @@ def storeview(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all
     return render(request, 'hello/storeview.html', {'stores':all_stores, 'items':all_items})
+
 @login_required(login_url='loginPage') # only logged in users can see this page
 def storelist(request):
     return render(request, 'hello/storelist.html',{})
@@ -49,15 +50,12 @@ def loginPage(request):
         if request.method == 'POST':
             username = request.POST.get('username')
             password = request.POST.get('password')
-
             user = authenticate(request, username=username, password=password)
-
             if user is not None:
                 login(request, user)
                 return redirect('storelist')
             else:
                 messages.info(request, 'Username or password is incorrect')
         context = {}
-
         return render(request, 'hello/login.html', context)
 # Create your views here.,
