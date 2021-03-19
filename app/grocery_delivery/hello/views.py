@@ -14,7 +14,7 @@ def index(request):
     all_grocstoreaddresses = Grocerystoreadd.objects.all
     all_groceryitem = Groceryitem.objects.all
     return render(request, 'hello/index.html', {'stores':all_stores, 'paymentInfo':all_payinfo, 'addresses':all_addresses,'drivers':all_drivers,'groceryaddresses':all_grocstoreaddresses, 'groceryitem': all_groceryitem})
-
+@login_required(login_url='loginPage') # only logged in users can see this page
 def storeview(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all
