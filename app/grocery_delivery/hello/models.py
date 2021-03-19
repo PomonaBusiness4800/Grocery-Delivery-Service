@@ -166,6 +166,7 @@ class Groceryitem(models.Model):
     brand = models.CharField(max_length=45)
     description = models.CharField(max_length=100)
     stock = models.IntegerField()
+    dest = models.CharField(max_length=45)
     def getGroceryID(self): return self.groceryid
     def getStrGroceryID(self): return str(self.groceryid)
     def getStoreID(self): return self.grocerystore_storeid.getStoreID()
@@ -176,6 +177,8 @@ class Groceryitem(models.Model):
     def getBrand(self): return self.brand
     def getDescription(self): return self.description
     def getStock(self): return self.stock
+    def getDest(self): return self.dest
+
     class Meta:
         managed = False
         db_table = 'groceryItem'

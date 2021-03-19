@@ -14,14 +14,14 @@ def index(request):
     all_grocstoreaddresses = Grocerystoreadd.objects.all
     all_groceryitem = Groceryitem.objects.all
     return render(request, 'hello/index.html', {'stores':all_stores, 'paymentInfo':all_payinfo, 'addresses':all_addresses,'drivers':all_drivers,'groceryaddresses':all_grocstoreaddresses, 'groceryitem': all_groceryitem})
-
+@login_required(login_url='loginPage') # only logged in users can see this page
 def storeview(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all
     return render(request, 'hello/storeview.html', {'stores':all_stores, 'items':all_items})
 
 @login_required(login_url='loginPage') # only logged in users can see this page
-def storelist(request):
+def storelist(request): # if method is get then request.get and get the name of the store to search in database for store to display
     return render(request, 'hello/storelist.html',{})
 
 def register(request):
@@ -33,7 +33,7 @@ def register(request):
             form = CreateUserForm(request.POST)
             if form.is_valid():
                 form.save()
-                user = form.cleaned_data.get('username')
+                user = form.cleaned_data.get('username') # createa variable
                 messages.success(request, 'Account created for ' + user)
                 return redirect('loginPage')
         context = {'form': form}
