@@ -54,35 +54,34 @@
 <div class="container">
         <center> 
         <h1> Store Name </h1>
-        {% for item in items %}
-                {% if item.getStoreID == 1 %}
-                        <div class="item_image">
-                                <img src="{% static 'hello/images/1.jpg' %}">
-                        </div>
-                        {{ item.getGroceryName }} </br>
-                        Brand: {{ item.getBrand }}
-                        Category: {{ item.getCategory }} </br>
-                        Price: ${{ item.getPrice }} </br>
-                        {% if item.getStock > 10 %}
-                                Stock: 10+ </br>
-                        {% elif item.getStock <= 0 %}
-                                Out of Stock! </br>
-                        {% else %}
-                                Stock: {{item.getStock}} </br>
-                        {% endif %}
-                {% endif %} </br>
-        {% endfor %}
-    </center>
+        </center>
+        <div class="row align-items-center">
+                {% for item in items %}
+                        {% if item.getStoreID == 1 %}
+                                <div class="col-md-3">
+                                        <img class="img-responsive img-thumbnail" src="{% static item.getDest %}"> </br>
+                                        {{ item.getGroceryName }} </br>
+                                        Brand: {{ item.getBrand }} </br>
+                                        Category: {{ item.getCategory }} </br>
+                                        Price: ${{ item.getPrice }} </br>
+                                        {% if item.getStock > 10 %}
+                                                Stock: 10+ </br>
+                                        {% elif item.getStock <= 0 %}
+                                                Out of Stock! </br>
+                                        {% else %}
+                                                Stock: {{item.getStock}} </br>
+                                        {% endif %}
+                                </div>
+                        {% endif %} </br>
+                {% endfor %}
+        </div>
 <!--Footer-->
         <footer style="text-align: center">
                 <div class="row">
                         <div class="col-lg-12">
-                                <p>Copyright &copy; Pomona Buisness Machines</p>
+                                <p>Copyright &copy; Pomona Business Machines</p>
                         </div>
                 </div>
         </footer>
 {% endblock %}
 </div>
-
-
-        

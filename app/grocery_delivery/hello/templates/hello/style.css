@@ -55,6 +55,12 @@ figure {
     padding: 1rem;
 }
 
+img {
+  float: left;
+  width:  100px;
+  height: 100px;
+  object-fit: cover;
+}
 
 /*
 Extra small (xs) devices (portrait phones, less than 576px)
