@@ -24,6 +24,11 @@ def storeview(request):
 def storelist(request): # if method is get then request.get and get the name of the store to search in database for store to display
     return render(request, 'hello/storelist.html',{})
 
+@login_required(login_url='loginPage') # only logged in users can see this page
+def userprofile(request):
+    context = {}
+    return render(request, 'hello/userprofile.html', context)
+
 def register(request):
     if request.user.is_authenticated:
         return redirect('storelist')
