@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from .models import Grocerystore, Userpaymentinfo, Address, Deliverydriver, Grocerystoreadd, Groceryitem
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CreateUserForm
+from .forms import CreateUserForm, addAddressForm, addPaymentForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 def index(request):
     all_stores = Grocerystore.objects.all
@@ -27,7 +28,37 @@ def storelist(request): # if method is get then request.get and get the name of 
 @login_required(login_url='loginPage') # only logged in users can see this page
 def userprofile(request):
     context = {}
-    return render(request, 'hello/userprofile.html', context)
+    if request.method == "POST":
+        if request.POST.get('streetaddress'):
+            form = addAddressForm(request.POST or None)
+            if form.is_valid():
+                print ("valid")
+                userid = request.user.id
+                userobj = User.objects.get(id = userid)
+                instance = form.save(commit = False)
+                instance.auth_user = userobj
+                instance.save()
+                return render(request, 'hello/userprofile.html', context)
+            else:
+                context = {'form':form}
+                return render(request, 'hello/userprofile.html', context)
+        if request.POST.get('cardnumber'):
+            form = addPaymentForm(request.POST or None)
+            print("here")
+
+            if form.is_valid():
+                print("valid")
+                userid = request.user.id
+                userobj = User.objects.get(id = userid)
+                instance = form.save(commit = False)
+                instance.auth_user = userobj
+                instance.save()
+                return render(request, 'hello/userprofile.html', context)
+            else:
+                context = {'form':form}
+                return render(request, 'hello/userprofile.html', context)
+    else: 
+        return render(request, 'hello/userprofile.html', context)
 
 def register(request):
     if request.user.is_authenticated:

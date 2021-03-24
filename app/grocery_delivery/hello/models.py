@@ -6,11 +6,11 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class Address(models.Model):
-    useraddressid = models.AutoField(db_column='userAddressID', primary_key=True)  # Field name made lowercase.
-    auth_user = models.ForeignKey('AuthUser', models.DO_NOTHING)
+    useraddressid = models.AutoField(db_column='userAddressID', primary_key=True, default = None)  # Field name made lowercase.
+    auth_user = models.ForeignKey(User, models.DO_NOTHING, default= None)
     firstname = models.CharField(db_column='firstName', max_length=45)  # Field name made lowercase.
     lastname = models.CharField(db_column='lastName', max_length=45)  # Field name made lowercase.
     streetaddress = models.CharField(db_column='streetAddress', max_length=45)  # Field name made lowercase.
@@ -265,7 +265,7 @@ class Purchaseinfo(models.Model):
 
 class Userpaymentinfo(models.Model):
     paymentid = models.AutoField(db_column='paymentID', primary_key=True)  # Field name made lowercase.
-    auth_user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    auth_user = models.ForeignKey(User, models.DO_NOTHING, default = None)
     cardnumber = models.CharField(max_length=16)
     securitynumber = models.IntegerField()
     expirationdate = models.CharField(db_column='expirationDate', max_length=10)  # Field name made lowercase.

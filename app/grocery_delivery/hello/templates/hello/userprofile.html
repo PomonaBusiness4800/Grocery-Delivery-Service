@@ -46,22 +46,30 @@
         <br><br>
         <p>
             <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Add an address</button>
-        </p>
+        </p> 
         <div class="collapse" id="collapseExample">
             <div class="card card-body">
-                <form class="row g-3" method="POST" action="" >
+                <form class="row g-3" method="POST" action="{% url 'userprofile' %}" >
                     {% csrf_token %}
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label">First Name: </label>
+                        <input type="text" class="form-control" id="inputFirstName" name="firstname">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label">Last Name: </label>
+                        <input type="text" class="form-control" id="inputFirstName" name="lastname">
+                    </div>
                       <div class="col-12">
                         <label for="inputAddress" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="">
+                        <input type="text" class="form-control" id="inputAddress" name="streetaddress">
                       </div>
                       <div class="col-md-6">
                         <label for="inputCity" class="form-label">City</label>
-                        <input type="text" class="form-control" id="inputCity">
+                        <input type="text" class="form-control" id="inputCity" name="city">
                       </div>
                       <div class="col-md-4">
                         <label for="inputState" class="form-label">State</label>
-                        <select id="inputState" class="form-select">
+                        <select id="inputState" class="form-select" name="state">
                                 <option selected>Choose State</option>
                                 <option value="AL">AL</option>
                                 <option value="AK">AK</option>
@@ -118,8 +126,9 @@
                       </div>
                       <div class="col-md-2">
                         <label for="inputZip" class="form-label">Zip</label>
-                        <input type="text" class="form-control" id="inputZip">
+                        <input type="text" class="form-control" id="inputZip" name="zipcode">
                       </div>
+                        {{form.errors}}
                       <div class="col-12">
                         <button type="submit" class="btn btn-primary">Add new address</button>
                       </div>
@@ -133,23 +142,25 @@
         </p>
         <div class="collapse" id="collapseExample1">
             <div class="card card-body">
-                <form class="row g-3" method="POST" action="" >
+                <form class="row g-3" method="POST" action="{% url 'userprofile' %}" >
                     {% csrf_token %}
                       <div class="col-12">
                         <label for="inputAddress" class="form-label">Credit Card number: </label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="">
+                        <input type="text" class="form-control" id="inputNumber" placeholder="" name="cardnumber">
                       </div>
                       <div class="col-md-6">
                         <label for="inputCity" class="form-label">Security number: </label>
-                        <input type="text" class="form-control" id="inputCity" placeholder="ex: 123">
+                        <input type="text" class="form-control" id="inputSec" placeholder="ex: 123" name="securitynumber">
                       </div><div class="col-md-6">
                         <label for="inputCity" class="form-label">Expiration Date:  </label>
-                        <input type="text" class="form-control" id="inputCity" placeholder="ex: 01/21">
+                        <input type="text" class="form-control" id="inputExpir" placeholder="ex: 01/21" name="expirationdate">
                       </div>
                       <div class="col-md-2">
                         <label for="inputZip" class="form-label">Zip</label>
-                        <input type="text" class="form-control" id="inputZip">
+                        <input type="text" class="form-control" id="inputZip" name="zipcode">
                       </div>
+                        {{form.errors}}
+
                       <div class="col-12">
                         <button type="submit" class="btn btn-primary">Add new payment</button>
                       </div>
