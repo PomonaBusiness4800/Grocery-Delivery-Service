@@ -67,3 +67,12 @@ Michael: work on ccount creation for users, store view html creations.
 3/16/21: no meeting
 3/17/2021:
 Michael: fix database, continue login/account creation. maybe store list
+3/18/2021
+Michael: finishjed login/account creation. 
+3/19/2021
+Michael: bootstrapped page and uploaded to heroku. awork on account profile
+3/22/21
+Michael: add user profile page
+3/23/21
+Michael: add user profile page. need to list out current addresses and payment infos
+3
