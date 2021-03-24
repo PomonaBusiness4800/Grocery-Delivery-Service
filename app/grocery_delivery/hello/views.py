@@ -14,15 +14,42 @@ def index(request):
     all_grocstoreaddresses = Grocerystoreadd.objects.all
     all_groceryitem = Groceryitem.objects.all
     return render(request, 'hello/index.html', {'stores':all_stores, 'paymentInfo':all_payinfo, 'addresses':all_addresses,'drivers':all_drivers,'groceryaddresses':all_grocstoreaddresses, 'groceryitem': all_groceryitem})
-@login_required(login_url='loginPage') # only logged in users can see this page
-def storeview(request):
-    all_stores = Grocerystore.objects.all
-    all_items = Groceryitem.objects.all
-    return render(request, 'hello/storeview.html', {'stores':all_stores, 'items':all_items})
 
 @login_required(login_url='loginPage') # only logged in users can see this page
-def storelist(request): # if method is get then request.get and get the name of the store to search in database for store to display
-    return render(request, 'hello/storelist.html',{})
+def vons(request):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.all
+    return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items})
+
+@login_required(login_url='loginPage') # only logged in users can see this page
+def smart_final(request):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.all
+    return render(request, 'hello/smart&final.html', {'stores':all_stores, 'items':all_items})
+
+@login_required(login_url='loginPage') # only logged in users can see this page
+def wholefoods(request):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.all
+    return render(request, 'hello/wholefoods.html', {'stores':all_stores, 'items':all_items})
+
+@login_required(login_url='loginPage') # only logged in users can see this page
+def traderjoes(request):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.all
+    return render(request, 'hello/traderjoes.html', {'stores':all_stores, 'items':all_items})
+
+@login_required(login_url='loginPage') # only logged in users can see this page
+def food4less(request):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.all
+    return render(request, 'hello/food4less.html', {'stores':all_stores, 'items':all_items})
+
+@login_required(login_url='loginPage') # only logged in users can see this page
+def ralphs(request):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.all
+    return render(request, 'hello/ralphs.html', {'stores':all_stores, 'items':all_items})
 
 @login_required(login_url='loginPage') # only logged in users can see this page
 def userprofile(request):
@@ -31,7 +58,7 @@ def userprofile(request):
 
 def register(request):
     if request.user.is_authenticated:
-        return redirect('storelist')
+        return redirect('index')
     else:
         form = CreateUserForm()
         if request.method == "POST":
@@ -50,7 +77,7 @@ def logoutUser(request):
 
 def loginPage(request):
     if request.user.is_authenticated:
-        return redirect('storelist')
+        return redirect('index')
     else:
         if request.method == 'POST':
             username = request.POST.get('username')
@@ -58,7 +85,7 @@ def loginPage(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('storelist')
+                return redirect('index')
             else:
                 messages.info(request, 'Username or password is incorrect')
         context = {}
