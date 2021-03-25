@@ -55,6 +55,10 @@ def ralphs(request):
 @login_required(login_url='loginPage') # only logged in users can see this page
 def userprofile(request):
     context = {}
+    addresses = Address.objects.filter(auth_user = request.user)
+    payments = Userpaymentinfo.objects.filter(auth_user = request.user)
+    context ['addresses'] = addresses
+    context ['payments'] = payments
     if request.method == "POST":
         if request.POST.get('streetaddress'):
             form = addAddressForm(request.POST or None)
