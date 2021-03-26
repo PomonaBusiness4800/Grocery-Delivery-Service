@@ -26,6 +26,7 @@ class Address(models.Model):
     def getCity(self): return self.city
     def getZipCode(self): return self.zipcode
     def getState(self): return self.state
+    
 
     class Meta:
         managed = False
