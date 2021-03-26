@@ -21,6 +21,10 @@ def vons(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all
     return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items})
+def vonsCats(request, cats):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.filter(category = cats)
+    return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items})
 
 @login_required(login_url='loginPage') # only logged in users can see this page
 def smart_final(request):
