@@ -75,4 +75,6 @@ Michael: bootstrapped page and uploaded to heroku. awork on account profile
 Michael: add user profile page
 3/23/21
 Michael: add user profile page. need to list out current addresses and payment infos
-3
+3/24/21: 
+Michael:list out current addresse and payments. refine links and redirects
+3/25/21:
