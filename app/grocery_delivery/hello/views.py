@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView, ListView
 
 def index(request):
     all_stores = Grocerystore.objects.all
@@ -62,4 +63,15 @@ def loginPage(request):
         context = {}
 
         return render(request, 'hello/login.html', context)
+
+class SearchResultsView(ListView):
+    model = Groceryitem
+    template_name = 'search_results.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = City.objects.filter(
+                Q(name__icontains=query) | Q(state__icontains=query)
+            )
+        return object_list
 # Create your views here.,
