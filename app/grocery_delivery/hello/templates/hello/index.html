@@ -13,37 +13,9 @@
 <body>
 
   <!--Navigation Portion (top)-->
-  <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+  {% include 'hello/snippets/navigationbar_home.html' %}
 
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#"><img src="img/logo.jpg" alt="" width="200px" height="200px"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="*">Home</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="*">Address</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="*">Account</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="*">Hi (Account)</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="*">Contact Us</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <--Image Slider-->
+  <!--Image Slider-->
     <div id="slides" class="carousel slide" data-ride="carousel">
     <ul class="carousel-indicators">
       <li data-target=#slides data-slide-to=" " class="active"></li>
@@ -59,7 +31,6 @@
     </div>
   </div>
   
-
     <div class="container">
         {% if messages %}
             {% for message in messages %}
@@ -75,12 +46,23 @@
         <p>--work-progress--</p>
     </div>
     <div style="text-align: center">
-        <a href="storeview" target="_self">Store View</a>
+        <a href="vons" target="_self">Vons</a>
+        <br/>
+        <a href="smart&final" target="_self">Smart & Final</a>
+        <br/>
+        <a href="wholefoods" target="_self">Whole Foods</a>
+        <br/>
+        <a href="traderjoes" target="_self">Trader Joe's</a>
+        <br/>
+        <a href="food4less" target="_self">Food 4 Less</a>
+        <br/>
+        <a href="ralphs" target="_self">Ralph's</a>
         <br/>
         <a href="register" target="_self">Register</a>
+        <br/>
+        <a href="loginPage" target="_self">Login</a>
     </div>
     <br/>
-    
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -93,3 +75,5 @@
     -->
 </body>
 </html>
+
+<!-- each store will have its own file -->

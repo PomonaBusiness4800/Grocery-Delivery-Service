@@ -6,11 +6,11 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class Address(models.Model):
-    useraddressid = models.AutoField(db_column='userAddressID', primary_key=True)  # Field name made lowercase.
-    user_userid = models.ForeignKey('User', models.DO_NOTHING, db_column='user_userID')  # Field name made lowercase.
+    useraddressid = models.AutoField(db_column='userAddressID', primary_key=True, default = None)  # Field name made lowercase.
+    auth_user = models.ForeignKey(User, models.DO_NOTHING, default= None)
     firstname = models.CharField(db_column='firstName', max_length=45)  # Field name made lowercase.
     lastname = models.CharField(db_column='lastName', max_length=45)  # Field name made lowercase.
     streetaddress = models.CharField(db_column='streetAddress', max_length=45)  # Field name made lowercase.
@@ -26,8 +26,6 @@ class Address(models.Model):
     def getCity(self): return self.city
     def getZipCode(self): return self.zipcode
     def getState(self): return self.state
-    
-
     class Meta:
         managed = False
         db_table = 'address'
@@ -110,9 +108,6 @@ class Deliverydriver(models.Model):
     def getDriverLastName(self): return self.driverlastname
     def getCarModel(self): return self.carmodel
     def getLicensePlate(self): return self.licenseplate
-
-    def __str__(self):
-        return self.driverfirstname + ' ' + self.driverlastname + ' id: ' + str(self.driverid)
     class Meta:
         managed = False
         db_table = 'deliveryDriver'
@@ -171,6 +166,7 @@ class Groceryitem(models.Model):
     brand = models.CharField(max_length=45)
     description = models.CharField(max_length=100)
     stock = models.IntegerField()
+    dest = models.CharField(max_length=45)
     def getGroceryID(self): return self.groceryid
     def getStrGroceryID(self): return str(self.groceryid)
     def getStoreID(self): return self.grocerystore_storeid.getStoreID()
@@ -181,9 +177,7 @@ class Groceryitem(models.Model):
     def getBrand(self): return self.brand
     def getDescription(self): return self.description
     def getStock(self): return self.stock
-
-    def __str__(self):
-        return str(self.groceryid)
+    def getDest(self): return self.dest
 
     class Meta:
         managed = False
@@ -200,11 +194,8 @@ class Grocerystore(models.Model):
     def getAddressInfo(self): return self.grocerystoreadd_storeaddressid
     def getStoreName(self): return self.storename
     def getDescription(self): return self.description
-
     def __str__(self):
-        return 'Store ID: ' + str(self.storeid) + ' Store name: ' + self.storename
-    
-
+        return 'store ID: ' + str(self.storeid) + ' store name: ' + self.storename
     class Meta:
         managed = False
         db_table = 'groceryStore'
@@ -221,10 +212,8 @@ class Grocerystoreadd(models.Model):
     def getCity(self): return self.city
     def getZipCode(self): return self.zipcode
     def getState(self): return self.state
-
     def __str__(self):
         return self.streetaddress + ' ' + self.city + ' ' + self.zipcode + ' ' + self.state
-
     class Meta:
         managed = False
         db_table = 'groceryStoreAdd'
@@ -244,7 +233,6 @@ class Orderstatus(models.Model):
 
     def __str__(self):
         return 'Order ID: ' + self.orderstatusid + '\nDelivery Driver: ' + self.getDeliverDriverInfo() + '\nStatus: ' + self.status
-
     class Meta:
         managed = False
         db_table = 'orderStatus'
@@ -267,39 +255,17 @@ class Purchaseinfo(models.Model):
     def getTotalItems(self): return self.totalitems
     def getDate(self): return self.date
     def getTime(self): return self.time
-    
+
     def __str__(self):
         return 'Total Items Bought: ' + self.totalitems + '\nTotal Price: ' + self.totalprice + '\nTime of Purchase: ' + self.date + ' ' + self.time
-
     class Meta:
         managed = False
         db_table = 'purchaseInfo'
 
 
-class User(models.Model):
-    userid = models.AutoField(db_column='userID', primary_key=True)  # Field name made lowercase.
-    username = models.CharField(max_length=255)
-    password = models.CharField(max_length=32)
-    firstname = models.CharField(max_length=45)
-    lastname = models.CharField(max_length=45)
-    emailaddress = models.CharField(max_length=45)
-    def getUserID(self): return self.userid
-    def getUserName(self): return self.username
-    def getPassword(self): return self.password
-    def getFirstName(self): return self.firstname
-    def getLastName(self): return self.lastname
-    def getEmailAddress(self): return self.emailaddress
-    
-    def __str__(self):
-        return self.firstname + ' ' + self.lastname + ' id: ' + str(self.userid)
-
-    class Meta:
-        db_table = 'user'
-
-
 class Userpaymentinfo(models.Model):
     paymentid = models.AutoField(db_column='paymentID', primary_key=True)  # Field name made lowercase.
-    user_userid = models.ForeignKey(User, models.DO_NOTHING, db_column='user_userID')  # Field name made lowercase.
+    auth_user = models.ForeignKey(User, models.DO_NOTHING, default = None)
     cardnumber = models.CharField(max_length=16)
     securitynumber = models.IntegerField()
     expirationdate = models.CharField(db_column='expirationDate', max_length=10)  # Field name made lowercase.
@@ -311,10 +277,9 @@ class Userpaymentinfo(models.Model):
     def getSecurityNumber(self): return self.securitynumber
     def getExpirationDate(self): return self.expirationdate
     def getZipCode(self): return self.zipcode
-    
+
     def __str__(self):
         return self.user_userid + '\nCard Number: ' + self.cardnumber + ' Security Number: ' + self.securitynumber + '\nExpiration Date: ' + self.expirationdate + ' Zipcode: ' + self.zipcode
-
     class Meta:
         managed = False
         db_table = 'userPaymentInfo'

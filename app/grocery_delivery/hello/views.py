@@ -21,10 +21,6 @@ def vons(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all
     return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items})
-def vonsCats(request, cats):
-    all_stores = Grocerystore.objects.all
-    all_items = Groceryitem.objects.filter(category = cats)
-    return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items})
 
 @login_required(login_url='loginPage') # only logged in users can see this page
 def smart_final(request):
@@ -80,6 +76,20 @@ def userprofile(request):
         if request.POST.get('cardnumber'):
             form = addPaymentForm(request.POST or None)
             print("here")
+
+            if form.is_valid():
+                print("valid")
+                userid = request.user.id
+                userobj = User.objects.get(id = userid)
+                instance = form.save(commit = False)
+                instance.auth_user = userobj
+                instance.save()
+                return render(request, 'hello/userprofile.html', context)
+            else:
+                context = {'form':form}
+                return render(request, 'hello/userprofile.html', context)
+    else: 
+        return render(request, 'hello/userprofile.html', context)
 
 def register(request):
     if request.user.is_authenticated:

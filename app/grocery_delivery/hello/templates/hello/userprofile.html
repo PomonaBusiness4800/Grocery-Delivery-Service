@@ -46,6 +46,19 @@
             </div>
         </div>
         <br><br>
+        <div class="row">
+            <div class="col-sm-6">
+                {% for item in addresses %}
+                <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                    <div class="card-header">Address</div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.getFirstName }} {{ item.getLastName }}</h5>
+                        <p class="card-text">{{ item.getStreetAddress }} <br> {{ item.getCity }}, {{ item.getState }} <br> {{ item.getZipCode }} <br></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
         <p>
             <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Add an address</button>
         </p> 
@@ -139,6 +152,19 @@
             </div>
         </div>
         <br>
+        <div class="row">
+            {% for item in payments %}
+              <div class="col-sm-6">
+                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                        <div class="card-header">Payment</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Card Number: {{ item.getCardNumber}}</h5>
+                            <p class="card-text">{{ item.getSecurityNumber }} <br> Exp date: {{ item.getExpirationDate }} <br> Zip: {{ item.getZipCode }}</p>
+                        </div>
+                    </div>
+              </div>
+            {% endfor %}
+        </div>
         <p>
             <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">Add new payment</button>
         </p>
