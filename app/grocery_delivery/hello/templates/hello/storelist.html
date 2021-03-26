@@ -1,8 +1,0 @@
-{% extends 'hello/base.html' %}
-
-{% block content %}
-
-    <span>Hello, {{request.user}} </span>
-    <span> <a href= "{% url 'logout' %}" > Logout </a> </span>
-
-{% endblock %}

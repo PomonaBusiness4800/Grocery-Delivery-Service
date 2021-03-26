@@ -1,0 +1,41 @@
+{% extends 'hello/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="hello/style.css" rel="stylesheet"> 
+{% endblock %}
+
+{% block content %}
+<!-- Navigation -->
+{% include 'hello/snippets/navigationbar_home.html' %}
+{% include 'hello/snippets/navigationbar_grocery.html' %}
+
+<div class="container">
+        <center> 
+        <h1> Trader Joe's </h1>
+        </center>
+        <div class="row align-items-center">
+                {% for item in items %}
+                        {% if item.getStoreID == 4 %}
+                                <div class="col-md-3">
+                                        <img class="img-responsive img-thumbnail" src="{% static item.getDest %}" style="width:300px; height:300px"> </br>
+                                        {{ item.getGroceryName }} </br>
+                                        Brand: {{ item.getBrand }} </br>
+                                        Category: {{ item.getCategory }} </br>
+                                        Price: ${{ item.getPrice }} </br>
+                                        {% if item.getStock > 10 %}
+                                                Stock: 10+ </br>
+                                        {% elif item.getStock <= 0 %}
+                                                Out of Stock! </br>
+                                        {% else %}
+                                                Stock: {{item.getStock}} </br>
+                                        {% endif %}
+                                </div>
+                        {% endif %} </br>
+                {% endfor %}
+        </div>
+        
+<!--Footer-->
+{% include 'hello/snippets/footer.html' %}
+{% endblock %}
+</div>

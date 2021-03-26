@@ -1,0 +1,44 @@
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid" style="padding: 25px">
+    <a class="navbar-brand" href={% url 'index' %}>Instabasket</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href={% url 'index' %}> <---- See all stores</a>
+        </li>
+      </ul>
+      <div st>
+           <span>Hello, {{request.user}} </span>
+        <span> <a href= "{% url 'logout' %}" style="color: white"> Logout </a> </span>
+    </div>
+    </div>
+  </div>
+</nav>
+<div class="float-start">
+    <div class="dropdown" style="padding: 50px">
+  <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Categories
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="#">Fruits & Vegtables</a></li>
+    <li><a class="dropdown-item" href="#">Beverages</a></li>
+    <li><a class="dropdown-item" href="#">Breakfast & Cereal</a></li>
+    <li><a class="dropdown-item" href="#">Meat</a></li>
+    <li><a class="dropdown-item" href="#">Pantry Essentials</a></li>
+    <li><a class="dropdown-item" href="#">Frozen Foods</a></li>
+    <li><a class="dropdown-item" href="#">Cheese</a></li>
+    <li><a class="dropdown-item" href="#">Snacks</a></li>
+    <li><a class="dropdown-item" href="#">Dairy</a></li>
+  </ul>
+</div>
+</div>
+<div class="container" style="padding: 50px">
+    <form class="d-flex" style="align-content: center">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+</div>  
