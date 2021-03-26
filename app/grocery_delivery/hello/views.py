@@ -23,8 +23,57 @@ def storeview(request):
     return render(request, 'hello/storeview.html', {'stores':all_stores, 'items':all_items})
 @login_required(login_url='loginPage') # only logged in users can see this page
 
+<<<<<<< HEAD
 def storelist(request):
     return render(request, 'hello/storelist.html',{})
+=======
+@login_required(login_url='loginPage') # only logged in users can see this page
+def food4less(request):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.all
+    return render(request, 'hello/food4less.html', {'stores':all_stores, 'items':all_items})
+
+@login_required(login_url='loginPage') # only logged in users can see this page
+def ralphs(request):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.all
+    return render(request, 'hello/ralphs.html', {'stores':all_stores, 'items':all_items})
+
+@login_required(login_url='loginPage') # only logged in users can see this page
+def userprofile(request):
+    context = {}
+    if request.method == "POST":
+        if request.POST.get('streetaddress'):
+            form = addAddressForm(request.POST or None)
+            if form.is_valid():
+                print ("valid")
+                userid = request.user.id
+                userobj = User.objects.get(id = userid)
+                instance = form.save(commit = False)
+                instance.auth_user = userobj
+                instance.save()
+                return render(request, 'hello/userprofile.html', context)
+            else:
+                context = {'form':form}
+                return render(request, 'hello/userprofile.html', context)
+        if request.POST.get('cardnumber'):
+            form = addPaymentForm(request.POST or None)
+            print("here")
+
+            if form.is_valid():
+                print("valid")
+                userid = request.user.id
+                userobj = User.objects.get(id = userid)
+                instance = form.save(commit = False)
+                instance.auth_user = userobj
+                instance.save()
+                return render(request, 'hello/userprofile.html', context)
+            else:
+                context = {'form':form}
+                return render(request, 'hello/userprofile.html', context)
+    else: 
+        return render(request, 'hello/userprofile.html', context)
+>>>>>>> parent of 9050ad6 (added list of addresses and payments for user profile)
 
 def register(request):
     if request.user.is_authenticated:
