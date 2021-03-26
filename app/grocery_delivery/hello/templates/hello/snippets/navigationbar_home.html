@@ -10,19 +10,19 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="*">Home</a>
+            <a class="nav-link" href={% url 'index' %}>Home</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="*">Address</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="*">Account</a>
+            <a class="nav-link" href={% url 'userprofile' %}>Account</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="*">Hello, {{request.user}} </a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="*">Contact Us</a>
+            <a class="nav-link" href="https://pomonabusiness.wixsite.com/grocery-delivery">Contact Us</a>
           </li>
         </ul>
       </div>

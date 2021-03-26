@@ -2,6 +2,8 @@
 
 {% block content %}
 
+<!--Navigation Portion (top)-->
+  {% include 'hello/snippets/navigationbar_home.html' %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid" style="padding: 25px">
             <a class="navbar-brand" href="#">Instabasket</a>
@@ -11,7 +13,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href={% url 'storelist' %}> <---- See all stores</a>
+                        <a class="nav-link active" aria-current="page" href={% url 'index' %}> <---- See all stores</a>
                     </li>
                 </ul>
                 <div st>
@@ -44,6 +46,19 @@
             </div>
         </div>
         <br><br>
+        <div class="row">
+            <div class="col-sm-6">
+                {% for item in addresses %}
+                <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                    <div class="card-header">Address</div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.getFirstName }} {{ item.getLastName }}</h5>
+                        <p class="card-text">{{ item.getStreetAddress }} <br> {{ item.getCity }}, {{ item.getState }} <br> {{ item.getZipCode }} <br></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
         <p>
             <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Add an address</button>
         </p> 
@@ -137,6 +152,19 @@
             </div>
         </div>
         <br>
+        <div class="row">
+            {% for item in payments %}
+              <div class="col-sm-6">
+                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                        <div class="card-header">Payment</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Card Number: {{ item.getCardNumber}}</h5>
+                            <p class="card-text">{{ item.getSecurityNumber }} <br> Exp date: {{ item.getExpirationDate }} <br> Zip: {{ item.getZipCode }}</p>
+                        </div>
+                    </div>
+              </div>
+            {% endfor %}
+        </div>
         <p>
             <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">Add new payment</button>
         </p>
@@ -171,4 +199,6 @@
     </div>
 
     
+<!--Footer-->
+{% include 'hello/snippets/footer.html' %}
 {% endblock %}
