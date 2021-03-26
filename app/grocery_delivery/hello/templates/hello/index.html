@@ -11,6 +11,55 @@
     <title>InstaBasket</title>
   </head>
 <body>
+
+  <!--Navigation Portion (top)-->
+  <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="img/logo.jpg" alt="" width="200px" height="200px"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="*">Home</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="*">Address</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="*">Account</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="*">Hi (Account)</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="*">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <--Image Slider-->
+    <div id="slides" class="carousel slide" data-ride="carousel">
+    <ul class="carousel-indicators">
+      <li data-target=#slides data-slide-to=" " class="active"></li>
+      <li data-target=#slides data-slide-to=" " class="active"></li>
+      <li data-target=#slides data-slide-to=" " class="active"></li>
+    </ul>
+
+    <div class="carousel-inner">
+
+      <div class="carousel-item">
+        
+      </div>
+    </div>
+  </div>
+  
+
     <div class="container">
         {% if messages %}
             {% for message in messages %}
@@ -31,15 +80,7 @@
         <a href="register" target="_self">Register</a>
     </div>
     <br/>
-    <div class="container">
-        <strong>Users:</strong> <br/>
-        {% for user in allUsers %}
-        Username: {{ user.username }} <br/>
-        Name: {{ user.firstname }} {{user.lastname}}<br/>
-        Email: {{ user.emailaddress }}<br/><br/>
-        <hr style="width: 50%">
-    {% endfor %}
-    </div>
+    
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
