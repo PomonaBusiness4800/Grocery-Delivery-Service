@@ -39,8 +39,9 @@
 </div>
 </div>
 <div class="container" style="padding: 50px">
-    <form class="d-flex" style="align-content: center">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <form class="d-flex" style="align-content: center" method="POST" action="./search">
+        {%csrf_token%}
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchkey">
         <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
 </div>  
