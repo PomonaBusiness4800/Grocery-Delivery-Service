@@ -83,3 +83,7 @@ Michael: finish catagories link.
 Michael: Refresh store view page, complete search bar, cart addition, add more items to the store
 4/5/21:
 Michael: work on search bar and cart view
+4/6/21
+Michael: add categories to each store and finished the search for each store 
+4/7/21
+Michael: add orderitem as an object into the database to be able to add items to cart.
