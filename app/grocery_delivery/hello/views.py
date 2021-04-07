@@ -21,11 +21,29 @@ def vons(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all
     return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items})
+def vonsSearch(request):
+    if request.method == "POST":
+        searchkey = request.POST['searchkey']
+        all_stores = Grocerystore.objects.all
+        all_items = Groceryitem.objects.filter(groceryname__icontains = searchkey)
+        return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items})
+    else: 
+        all_stores = Grocerystore.objects.all
+        all_items = Groceryitem.objects.all
+        return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items})
+def vonsCats(request, cats):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.filter(category = cats)
+    return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items})
 
 @login_required(login_url='loginPage') # only logged in users can see this page
 def smart_final(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all
+    return render(request, 'hello/smart&final.html', {'stores':all_stores, 'items':all_items})
+def smartCats(request, cats):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.filter(category = cats)
     return render(request, 'hello/smart&final.html', {'stores':all_stores, 'items':all_items})
 
 @login_required(login_url='loginPage') # only logged in users can see this page
@@ -33,17 +51,28 @@ def wholefoods(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all
     return render(request, 'hello/wholefoods.html', {'stores':all_stores, 'items':all_items})
+def wholefoodsCats(request, cats):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.filter(category = cats)
+    return render(request, 'hello/wholefoods.html', {'stores':all_stores, 'items':all_items})
 
 @login_required(login_url='loginPage') # only logged in users can see this page
 def traderjoes(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all
     return render(request, 'hello/traderjoes.html', {'stores':all_stores, 'items':all_items})
-
+def traderjoesCats(request, cats):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.filter(category = cats)
+    return render(request, 'hello/traderjoes.html', {'stores':all_stores, 'items':all_items})
 @login_required(login_url='loginPage') # only logged in users can see this page
 def food4less(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all
+    return render(request, 'hello/food4less.html', {'stores':all_stores, 'items':all_items})
+def food4lessCats(request, cats):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.filter(category = cats)
     return render(request, 'hello/food4less.html', {'stores':all_stores, 'items':all_items})
 
 @login_required(login_url='loginPage') # only logged in users can see this page
@@ -51,7 +80,10 @@ def ralphs(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all
     return render(request, 'hello/ralphs.html', {'stores':all_stores, 'items':all_items})
-
+def ralphsCats(request, cats):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.filter(category = cats)
+    return render(request, 'hello/ralphs.html', {'stores':all_stores, 'items':all_items})
 @login_required(login_url='loginPage') # only logged in users can see this page
 def userprofile(request):
     context = {}

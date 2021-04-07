@@ -78,3 +78,8 @@ Michael: add user profile page. need to list out current addresses and payment i
 3/24/21: 
 Michael:list out current addresse and payments. refine links and redirects
 3/25/21:
+Michael: finish catagories link.
+3/26/21:
+Michael: Refresh store view page, complete search bar, cart addition, add more items to the store
+4/5/21:
+Michael: work on search bar and cart view
