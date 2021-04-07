@@ -1,0 +1,21 @@
+{% extends 'hello/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="hello/style.css" rel="stylesheet"> 
+{% endblock %}
+
+{% block content %}
+<!-- Navigation -->
+{% include 'hello/snippets/navigationbar_home.html' %}
+
+<div class="container">
+        <center> 
+        <h1> Cart </h1>
+        </center>
+        
+        
+<!--Footer-->
+{% include 'hello/snippets/footer.html' %}
+{% endblock %}
+</div>
