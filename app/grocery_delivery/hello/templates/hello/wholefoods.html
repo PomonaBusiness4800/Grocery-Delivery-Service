@@ -18,7 +18,7 @@
                 {% for item in items %}
                         {% if item.getStoreID == 3 %}
                                 <div class="col-md-3">
-                                        <img class="img-responsive img-thumbnail" src="{% static item.getDest %}" style="width:300px; height:300px"> </br>
+                                        <img class="img-responsive img-thumbnail" src="{% static item.getDest %}" style="width:300px height:300px"> </br>
                                         {{ item.getGroceryName }} </br>
                                         Brand: {{ item.getBrand }} </br>
                                         Category: {{ item.getCategory }} </br>
