@@ -30,6 +30,7 @@
                                         {% else %}
                                                 Stock: {{item.getStock}} </br>
                                         {% endif %}
+                                        <span><a  href="{% url 'vonsAddCart' item.getGroceryID %}">Add to cart</a></span>
                                 </div>
                         {% endif %} </br>
                 {% endfor %}

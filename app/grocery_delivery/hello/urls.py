@@ -4,6 +4,7 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('index/', views.index, name="index_page"),
     path('vons/', views.vons, name="vons"),
+    path('vons/<int:item_id>', views.vonsAddCart, name="vonsAddCart"),
     path('vons/search', views.vonsSearch, name="vonsSearch"),
     path('vons/<str:cats>', views.vonsCats, name="vonsCats"),
     path('smart&final/', views.smart_final, name="smart&final"),

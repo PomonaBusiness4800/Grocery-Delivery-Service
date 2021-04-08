@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Grocerystore, Userpaymentinfo, Address, Deliverydriver, Grocerystoreadd, Groceryitem
+from .models import Grocerystore, Userpaymentinfo, Address, Deliverydriver, Grocerystoreadd, Groceryitem, Purchaseinfo, PurchaseinfoHasGroceryitem
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm, addAddressForm, addPaymentForm
@@ -20,6 +20,18 @@ def index(request):
 def vons(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all
+    return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items})
+def vonsAddCart(request, item_id):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.all
+    product = Groceryitem.objects.get(groceryid = item_id)
+    print(product.groceryname)
+    store = product.grocerystore_storeid # for mysql you have to create many to many with a connecting table
+    user_order, status = Purchaseinfo.objects.get_or_create(grocerystore_storeid=store) # to track the items in the order
+    order_item, status = PurchaseinfoHasGroceryitem.objects.get_or_create(purchaseinfo_purchaseid = user_order, groceryitem_groceryid = product) # purchaseinfo will have its id and the id of the orderitem #inside this new table, this is where the purchase info will have its list of items through the connecting table
+    if status: 
+        user_order.save()
+        order_item.save()
     return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items})
 def vonsSearch(request):
     if request.method == "POST":

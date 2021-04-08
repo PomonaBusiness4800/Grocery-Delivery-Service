@@ -236,16 +236,16 @@ class Orderstatus(models.Model):
     class Meta:
         managed = False
         db_table = 'orderStatus'
-
-
+        
+    
 class Purchaseinfo(models.Model):
     purchaseid = models.AutoField(db_column='purchaseID', primary_key=True)  # Field name made lowercase.
-    userpaymentinfo_paymentid = models.ForeignKey('Userpaymentinfo', models.DO_NOTHING, db_column='userPaymentInfo_paymentID')  # Field name made lowercase.
-    grocerystore_storeid = models.ForeignKey(Grocerystore, models.DO_NOTHING, db_column='groceryStore_storeID')  # Field name made lowercase.
-    totalprice = models.FloatField(db_column='totalPrice')  # Field name made lowercase.
-    totalitems = models.IntegerField(db_column='totalItems')  # Field name made lowercase.
-    date = models.CharField(max_length=45)
-    time = models.CharField(max_length=45)
+    userpaymentinfo_paymentid = models.ForeignKey('Userpaymentinfo', models.DO_NOTHING, db_column='userPaymentInfo_paymentID', blank=True, null=True)  # Field name made lowercase.
+    grocerystore_storeid = models.ForeignKey(Grocerystore, models.DO_NOTHING, db_column='groceryStore_storeID', blank=True, null=True)  # Field name made lowercase.
+    totalprice = models.FloatField(db_column='totalPrice', blank=True, null=True)  # Field name made lowercase.
+    totalitems = models.IntegerField(db_column='totalItems', blank=True, null=True)  # Field name made lowercase.
+    date = models.CharField(max_length=45, blank=True, null=True)
+    time = models.CharField(max_length=45, blank=True, null=True)
     def getPurchaseID(self): return self.purchaseid
     def getUserPaymentInfoID(self): return self.userpaymentinfo_paymentid.getUserPaymentInfoID()
     def getUserPaymentInfo(self): return self.userpaymentinfo_paymentid
@@ -261,8 +261,16 @@ class Purchaseinfo(models.Model):
     class Meta:
         managed = False
         db_table = 'purchaseInfo'
+        
+class PurchaseinfoHasGroceryitem(models.Model):
+    purchaseinfo_purchaseid = models.OneToOneField(Purchaseinfo, models.DO_NOTHING, db_column='purchaseInfo_purchaseID', primary_key=True)  # Field name made lowercase.
+    groceryitem_groceryid = models.ForeignKey(Groceryitem, models.DO_NOTHING, db_column='groceryItem_groceryID')  # Field name made lowercase.
 
-
+    class Meta:
+        managed = False
+        db_table = 'purchaseInfo_has_groceryItem'
+        unique_together = (('purchaseinfo_purchaseid', 'groceryitem_groceryid'),)
+        
 class Userpaymentinfo(models.Model):
     paymentid = models.AutoField(db_column='paymentID', primary_key=True)  # Field name made lowercase.
     auth_user = models.ForeignKey(User, models.DO_NOTHING, default = None)
