@@ -27,7 +27,7 @@ def vonsAddCart(request, item_id):
     product = Groceryitem.objects.get(groceryid = item_id)
     print(product.groceryname)
     store = product.grocerystore_storeid # for mysql you have to create many to many with a connecting table
-    user_order, status = Purchaseinfo.objects.get_or_create(grocerystore_storeid=store) # to track the items in the order
+    user_order, status = Purchaseinfo.objects.get_or_create(grocerystore_storeid=store, auth_user = request.user) # to track the items in the order
     order_item, status = PurchaseinfoHasGroceryitem.objects.get_or_create(purchaseinfo_purchaseid = user_order, groceryitem_groceryid = product) # purchaseinfo will have its id and the id of the orderitem #inside this new table, this is where the purchase info will have its list of items through the connecting table
     if status: 
         user_order.save()
@@ -149,7 +149,14 @@ def ralphsCats(request, cats):
 
 @login_required(login_url='loginPage') # only logged in users can see this page
 def cart(request):
-    return render(request, 'hello/cart.html',{})
+    context = {}
+    all_items = Groceryitem.objects.all
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all
+    context['user_orders'] = user_orders
+    context['all_items'] = all_items
+    context['all_orderitems'] = all_orderitems
+    return render(request, 'hello/cart.html',context)
 @login_required(login_url='loginPage') # only logged in users can see this page
 def userprofile(request):
     context = {}

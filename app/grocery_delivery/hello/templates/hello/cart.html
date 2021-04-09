@@ -13,8 +13,34 @@
         <center> 
         <h1> Cart </h1>
         </center>
-        
-        
+            {% for item in user_orders %}
+                {% for ob in all_orderitems %}
+                    {% if item.getPurchaseID is ob.getPurchaseID %}
+                       {% for groc in all_items %}
+                            {% if groc.getGroceryID is ob.getGroceryID %}
+                                <div class="card" style="width: 18rem;">
+                                  <img src="{% static groc.getDest %}" class="card-img-top" alt="...">
+                                  <div class="card-body">
+                                    <p class="card-text">{{groc.getGroceryName}}</p>
+                                    <p class="card-text">{{groc.getPrice}}</p>
+                                    <p class="card-text">{{groc.getStoreName}}</p>
+                                  </div>
+                                </div>
+                            {%  endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        <hr>
+        <div class="container" style="text-align: right">
+            <p>Total Price:</p> 
+            <br>
+            <button style="float: right"type="button" class="btn btn-primary btn-lg">Checkout</button>
+        </div>
+        <br>
+        <br><br>
+        <br><br>
+        <br>
 <!--Footer-->
 {% include 'hello/snippets/footer.html' %}
 {% endblock %}
