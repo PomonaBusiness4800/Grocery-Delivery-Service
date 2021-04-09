@@ -87,3 +87,7 @@ Michael: work on search bar and cart view
 Michael: add categories to each store and finished the search for each store 
 4/7/21
 Michael: add orderitem as an object into the database to be able to add items to cart.
+4/8/21
+Michael: finished first part of cart, items are displayed
+4/9/21
+Michael: will work on total price, and checkout button. Make things look better
