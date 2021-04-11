@@ -21,6 +21,15 @@
   -webkit-backface-visibility: visible;
   backface-visibility: visible;
 }
+
+.carousel-inner > .item >img{
+  min-height : 300px;
+  max-height : 300px;
+  width : 100%;
+}
+.container{
+  height:300px;
+}
 /*--- Fixed Background Image --*/
 figure {
   position: relative;
