@@ -7,7 +7,7 @@
 
 {% block content %}
 <!-- Navigation -->
-{% include 'hello/snippets/navigationbar_home.html' %}
+{% include 'hello/snippets/navigationbar_home.html' with cartTotal=numberItems %}
 
 <div class="container">
         <center> 
@@ -33,7 +33,7 @@
             {% endfor %}
         <hr>
         <div class="container" style="text-align: right">
-            <p>Total Price:</p> 
+            <p>Total Price: {{totalPrice}}</p> 
             <br>
             <button style="float: right"type="button" class="btn btn-primary btn-lg">Checkout</button>
         </div>

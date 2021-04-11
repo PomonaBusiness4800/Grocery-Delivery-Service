@@ -13,7 +13,8 @@
 <body>
 
   <!--Navigation Portion (top)-->
-  {% include 'hello/snippets/navigationbar_home.html' %}
+  {% include 'hello/snippets/navigationbar_home.html' with cartTotal=numberItems %}
+
 
   <!--Image Slider-->
     <div id="slides" class="carousel slide" data-ride="carousel">
@@ -68,9 +69,6 @@
             <a href="ralphs"><img class"img-responsive img-thumbnail" src="static/hello/images/ralphs.png" style="width: 200px; height:200px"></a>
           </div>
         </div>
-      <a href="register" target="_self">Register</a>
-      <br/>
-      <a href="loginPage" target="_self">Login</a>
       <br/>
     </div>
     <!-- Optional JavaScript; choose one of the two! -->

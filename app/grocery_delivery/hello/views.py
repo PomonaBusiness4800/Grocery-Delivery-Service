@@ -6,7 +6,9 @@ from .forms import CreateUserForm, addAddressForm, addPaymentForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db.models import Sum
 
+@login_required(login_url='loginPage') # only logged in users can see this page
 def index(request):
     all_stores = Grocerystore.objects.all
     all_payinfo = Userpaymentinfo.objects.all
@@ -14,13 +16,17 @@ def index(request):
     all_drivers = Deliverydriver.objects.all
     all_grocstoreaddresses = Grocerystoreadd.objects.all
     all_groceryitem = Groceryitem.objects.all
-    return render(request, 'hello/index.html', {'stores':all_stores, 'paymentInfo':all_payinfo, 'addresses':all_addresses,'drivers':all_drivers,'groceryaddresses':all_grocstoreaddresses, 'groceryitem': all_groceryitem})
+    numberItems = PurchaseinfoHasGroceryitem.objects.count()
+    return render(request, 'hello/index.html', {'stores':all_stores, 'paymentInfo':all_payinfo, 'addresses':all_addresses,'drivers':all_drivers,'groceryaddresses':all_grocstoreaddresses, 'groceryitem': all_groceryitem, 'numberItems':numberItems })
 
 @login_required(login_url='loginPage') # only logged in users can see this page
 def vons(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all
-    return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items})
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
+    numberItems = PurchaseinfoHasGroceryitem.objects.count()
+    print(numberItems)
+    return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 def vonsAddCart(request, item_id):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all
@@ -150,12 +156,22 @@ def ralphsCats(request, cats):
 @login_required(login_url='loginPage') # only logged in users can see this page
 def cart(request):
     context = {}
-    all_items = Groceryitem.objects.all
+    all_items = Groceryitem.objects.all()
     user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
-    all_orderitems = PurchaseinfoHasGroceryitem.objects.all
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    numberItems = PurchaseinfoHasGroceryitem.objects.count()
+    totalPrice = 0
+    for i in user_orders:
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        totalPrice = totalPrice + m.getPrice()
     context['user_orders'] = user_orders
     context['all_items'] = all_items
     context['all_orderitems'] = all_orderitems
+    context['numberItems'] = numberItems
+    context['totalPrice'] = totalPrice
     return render(request, 'hello/cart.html',context)
 @login_required(login_url='loginPage') # only logged in users can see this page
 def userprofile(request):
