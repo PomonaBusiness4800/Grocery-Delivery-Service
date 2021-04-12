@@ -58,7 +58,8 @@ def vonsCats(request, cats):
 def smart_final(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all
-    return render(request, 'hello/smart&final.html', {'stores':all_stores, 'items':all_items})
+    numberItems = PurchaseinfoHasGroceryitem.objects.count()
+    return render(request, 'hello/smart&final.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 def smart_finalSearch(request):
     if request.method == "POST":
         searchkey = request.POST['searchkey']
@@ -78,7 +79,8 @@ def smartCats(request, cats):
 def wholefoods(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all
-    return render(request, 'hello/wholefoods.html', {'stores':all_stores, 'items':all_items})
+    numberItems = PurchaseinfoHasGroceryitem.objects.count()
+    return render(request, 'hello/wholefoods.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 def wholefoodsSearch(request):
     if request.method == "POST":
         searchkey = request.POST['searchkey']
@@ -98,7 +100,8 @@ def wholefoodsCats(request, cats):
 def traderjoes(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all
-    return render(request, 'hello/traderjoes.html', {'stores':all_stores, 'items':all_items})
+    numberItems = PurchaseinfoHasGroceryitem.objects.count()
+    return render(request, 'hello/traderjoes.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 def traderjoesSearch(request):
     if request.method == "POST":
         searchkey = request.POST['searchkey']
@@ -117,7 +120,8 @@ def traderjoesCats(request, cats):
 def food4less(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all
-    return render(request, 'hello/food4less.html', {'stores':all_stores, 'items':all_items})
+    numberItems = PurchaseinfoHasGroceryitem.objects.count()
+    return render(request, 'hello/food4less.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 def food4lessSearch(request):
     if request.method == "POST":
         searchkey = request.POST['searchkey']
@@ -137,7 +141,8 @@ def food4lessCats(request, cats):
 def ralphs(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all
-    return render(request, 'hello/ralphs.html', {'stores':all_stores, 'items':all_items})
+    numberItems = PurchaseinfoHasGroceryitem.objects.count()
+    return render(request, 'hello/ralphs.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 def ralphsSearch(request):
     if request.method == "POST":
         searchkey = request.POST['searchkey']
