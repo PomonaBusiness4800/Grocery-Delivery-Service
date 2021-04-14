@@ -95,3 +95,5 @@ Michael: will work on total price, and checkout button. Make things look better
 Michael: total price and number of items at cart button work. Just need to work on checkout button
 4/13/21
 Michael: checkout will be in two parts, address selection and payment selection, then confirmation. almost finish address selection and will start on payment selection
+4/14/21
+Michael: will work on checkout confirmation and finish up checkout process
