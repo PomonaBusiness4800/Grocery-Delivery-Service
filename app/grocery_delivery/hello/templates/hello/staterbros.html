@@ -1,0 +1,18 @@
+{% extends 'hello/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="hello/style.css" rel="stylesheet"> 
+{% endblock %}
+
+{% block content %}
+<!-- Navigation -->
+{% include 'hello/snippets/navigationbar_home.html' %}
+
+
+<!--Store Image-->
+<div class="container">
+    <center>        
+            <img src="{% static 'hello/images/staterbros.png' %}">
+    </center>
+</div>
