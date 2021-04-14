@@ -33,9 +33,9 @@
             {% endfor %}
         <hr>
         <div class="container" style="text-align: right">
-            <p>Total Price: {{totalPrice}}</p> 
+            <p>Total Price: {{ totalPrice|floatformat:2 }}</p> 
             <br>
-            <button style="float: right"type="button" class="btn btn-primary btn-lg">Checkout</button>
+            <a class="btn btn-primary" href="{% url 'checkout' %}">Checkout</a>
         </div>
         <br>
         <br><br>

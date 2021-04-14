@@ -201,9 +201,9 @@ class Purchaseinfo(models.Model):
     grocerystore_storeid = models.ForeignKey(Grocerystore, models.DO_NOTHING, db_column='groceryStore_storeID', blank=True, null=True)  # Field name made lowercase.
     totalprice = models.FloatField(db_column='totalPrice', blank=True, null=True)  # Field name made lowercase.
     totalitems = models.IntegerField(db_column='totalItems', blank=True, null=True)  # Field name made lowercase.
-    date = models.CharField(max_length=45, blank=True, null=True)
-    time = models.CharField(max_length=45, blank=True, null=True)
-    auth_user_id = models.IntegerField(blank=True, null=True)
+    datetime = models.DateTimeField(db_column='dateTime', blank=True, null=True)  # Field name made lowercase.
+    purchased = models.IntegerField(blank=True, null=True)
+    auth_user = models.ForeignKey(AuthUser, models.DO_NOTHING)
 
     class Meta:
         managed = False
@@ -214,6 +214,7 @@ class PurchaseinfoHasGroceryitem(models.Model):
     purchaseinfo_has_groceryitemid = models.AutoField(db_column='purchaseInfo_has_groceryItemID', primary_key=True)  # Field name made lowercase.
     purchaseinfo_purchaseid = models.ForeignKey(Purchaseinfo, models.DO_NOTHING, db_column='purchaseInfo_purchaseID')  # Field name made lowercase.
     groceryitem_groceryid = models.ForeignKey(Groceryitem, models.DO_NOTHING, db_column='groceryItem_groceryID')  # Field name made lowercase.
+    purchased = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False

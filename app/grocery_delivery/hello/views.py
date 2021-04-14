@@ -25,34 +25,35 @@ def vons(request):
     all_items = Groceryitem.objects.all
     user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
     numberItems = PurchaseinfoHasGroceryitem.objects.count()
-    print(numberItems)
     return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 def vonsAddCart(request, item_id):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all
     product = Groceryitem.objects.get(groceryid = item_id)
-    print(product.groceryname)
     store = product.grocerystore_storeid # for mysql you have to create many to many with a connecting table
     user_order, status = Purchaseinfo.objects.get_or_create(grocerystore_storeid=store, auth_user = request.user) # to track the items in the order
     order_item, status = PurchaseinfoHasGroceryitem.objects.get_or_create(purchaseinfo_purchaseid = user_order, groceryitem_groceryid = product) # purchaseinfo will have its id and the id of the orderitem #inside this new table, this is where the purchase info will have its list of items through the connecting table
     if status: 
         user_order.save()
         order_item.save()
-    return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items})
+    numberItems = PurchaseinfoHasGroceryitem.objects.count()
+    return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 def vonsSearch(request):
+    numberItems = PurchaseinfoHasGroceryitem.objects.count()
     if request.method == "POST":
         searchkey = request.POST['searchkey']
         all_stores = Grocerystore.objects.all
         all_items = Groceryitem.objects.filter(groceryname__icontains = searchkey)
-        return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items})
+        return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
     else: 
         all_stores = Grocerystore.objects.all
         all_items = Groceryitem.objects.all
-        return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items})
+        return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 def vonsCats(request, cats):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.filter(category = cats)
-    return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items})
+    numberItems = PurchaseinfoHasGroceryitem.objects.count()
+    return render(request, 'hello/vons.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 
 @login_required(login_url='loginPage') # only logged in users can see this page
 def smart_final(request):
@@ -172,12 +173,43 @@ def cart(request):
                 for m in all_items:
                     if j.getGroceryID() is m.getGroceryID():
                         totalPrice = totalPrice + m.getPrice()
+    print(totalPrice)
     context['user_orders'] = user_orders
     context['all_items'] = all_items
     context['all_orderitems'] = all_orderitems
     context['numberItems'] = numberItems
     context['totalPrice'] = totalPrice
     return render(request, 'hello/cart.html',context)
+
+@login_required(login_url='loginPage') # only logged in users can see this page
+def checkout(request): # choose address and payment option show total price
+    context = {}
+    all_items = Groceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    numberItems = PurchaseinfoHasGroceryitem.objects.count()
+    addresses = Address.objects.filter(auth_user = request.user)
+    payments = Userpaymentinfo.objects.filter(auth_user = request.user)
+    totalPrice = 0
+    for i in user_orders:
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        totalPrice = totalPrice + m.getPrice()
+    context['all_orderitems'] = all_orderitems
+    context['user_orders'] = user_orders
+    context['all_items'] = all_items
+    context['numberItems'] = numberItems
+    context['totalPrice'] = totalPrice
+    context['addresses'] = addresses
+    context['payments'] = payments
+    return render(request, 'hello/checkout.html', context)
+def payment(request, address): # chosen address and now prompt user for payment 
+    numberItems = PurchaseinfoHasGroceryitem.objects.count()
+    context['numberItems'] = numberItems
+    context = {}
+    return render(request, 'hello/payment.html', context)
 @login_required(login_url='loginPage') # only logged in users can see this page
 def userprofile(request):
     context = {}

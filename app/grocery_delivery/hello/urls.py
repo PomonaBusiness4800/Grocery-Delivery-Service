@@ -28,4 +28,6 @@ urlpatterns = [
     path('logout/', views.logoutUser, name="logout"),
     path('userprofile/', views.userprofile, name="userprofile"),
     path('cart/', views.cart, name="cart"),
+    path('checkout/', views.checkout, name="checkout"),
+    path('payment/<int:address>', views.payment, name="payment"),
 ]

@@ -1,0 +1,15 @@
+{% extends 'hello/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!-- Navigation -->
+{% include 'hello/snippets/navigationbar_home.html' with cartTotal=numberItems %}
+
+
+
+
+
+<!--Footer-->
+{% include 'hello/snippets/footer.html' %}
+{% endblock %}

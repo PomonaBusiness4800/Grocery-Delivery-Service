@@ -245,9 +245,9 @@ class Purchaseinfo(models.Model):
     grocerystore_storeid = models.ForeignKey(Grocerystore, models.DO_NOTHING, db_column='groceryStore_storeID', blank=True, null=True)  # Field name made lowercase.
     totalprice = models.FloatField(db_column='totalPrice', blank=True, null=True)  # Field name made lowercase.
     totalitems = models.IntegerField(db_column='totalItems', blank=True, null=True)  # Field name made lowercase.
-    date = models.CharField(max_length=45, blank=True, null=True)
-    time = models.CharField(max_length=45, blank=True, null=True)
-    auth_user = models.ForeignKey(User, models.DO_NOTHING, default= None, null=True)
+    auth_user = models.ForeignKey(User, models.DO_NOTHING, default=None)
+    datetime = models.DateTimeField(db_column='dateTime', blank=True, null=True)  # Field name made lowercase.
+    purchased = models.IntegerField(default=0)
     def getPurchaseID(self): return self.purchaseid
     def getUserPaymentInfoID(self): return self.userpaymentinfo_paymentid.getUserPaymentInfoID()
     def getUserPaymentInfo(self): return self.userpaymentinfo_paymentid
@@ -255,8 +255,6 @@ class Purchaseinfo(models.Model):
     def getStoreInfo(self): return self.grocerystore_storeid
     def getTotalPrice(self): return self.totalprice
     def getTotalItems(self): return self.totalitems
-    def getDate(self): return self.date
-    def getTime(self): return self.time
 
     def __str__(self):
         return 'Total Items Bought: ' + self.totalitems + '\nTotal Price: ' + self.totalprice + '\nTime of Purchase: ' + self.date + ' ' + self.time
@@ -268,6 +266,7 @@ class PurchaseinfoHasGroceryitem(models.Model):
     purchaseinfo_has_groceryitemid = models.AutoField(db_column='purchaseInfo_has_groceryItemID', primary_key=True)  # Field name made lowercase.
     purchaseinfo_purchaseid = models.ForeignKey(Purchaseinfo, models.DO_NOTHING, db_column='purchaseInfo_purchaseID')  # Field name made lowercase.
     groceryitem_groceryid = models.ForeignKey(Groceryitem, models.DO_NOTHING, db_column='groceryItem_groceryID')  # Field name made lowercase.
+    purchased = models.IntegerField(default=0)
     def getGroceryID(self): return self.groceryitem_groceryid.getGroceryID()
     def getPurchaseID(self): return self.purchaseinfo_purchaseid.getPurchaseID()
     class Meta:
