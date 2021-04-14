@@ -11,12 +11,19 @@
 {% include 'hello/snippets/navigationbar_home.html' with cartTotal=numberItems %}
 {% include 'hello/snippets/navigationbar_grocery.html' %}
 <!--Carousel-->
-{% include 'hello/snippets/carousel_grocery.html' %}
+
+<!--Store Image-->
+<div class="container">
+        <center>        
+                <img src="{% static 'hello/images/vons.png' %}">
+        </center>
+</div>
+
+<!--Categories and Search Bar-->
+{% include 'hello/snippets/searchbar_category.html' %}
+
 
 <div class="container">
-        <center> 
-        <h1> Vons </h1>
-        </center>
         <div class="row align-items-center">
                 {% for item in items %}
                         {% if item.getStoreID == 1 %}

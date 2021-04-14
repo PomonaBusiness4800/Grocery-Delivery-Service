@@ -10,28 +10,50 @@
 
     <title>InstaBasket</title>
   </head>
-<body>
 
+<body>
   <!--Navigation Portion (top)-->
   {% include 'hello/snippets/navigationbar_home.html' with cartTotal=numberItems %}
 
-
   <!--Image Slider-->
-    <div id="slides" class="carousel slide" data-ride="carousel">
-    <ul class="carousel-indicators">
-      <li data-target=#slides data-slide-to=" " class="active"></li>
-      <li data-target=#slides data-slide-to=" " class="active"></li>
-      <li data-target=#slides data-slide-to=" " class="active"></li>
-    </ul>
-
+  <div id="slides" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#slides" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#slides" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#slides" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
     <div class="carousel-inner">
-
+      <div class="carousel-item active">
+        <img src="static/hello/images/carousel0.png" class="img-fluid">
+        <div class="carousel-caption">
+          <h1 class="display-2">Shop Online for Groceries</h1>
+          <h3>Shop at local grocery stores near you</h3>
+        </div>
+      </div>
       <div class="carousel-item">
-        
+        <img src="static/hello/images/carousel1.png" class="img-fluid">
+        <div class="carousel-caption">
+          <h1 class="display-2">Ingredients</h1>
+          <h3>Get all ingredients needed for your next meal</h3>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="static/hello/images/carousel2.png" class="img-fluid">
+        <div class="carousel-caption">
+          <h1 class="display-2">Delivery</h1>
+          <h3>All your groceries conveniently delivered straight to your door</h3>
+        </div>
       </div>
     </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#slides" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#slides" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
-  
   
     <div class="container">
         {% if messages %}
@@ -43,35 +65,72 @@
             {% endfor %}
         {% endif %}
     </div>
-    <div style="text-align:center">
-        <img class="img-responsive" src="static/hello/images/InstaBasketLogo.png" style="width:300px height:300px">
+    </br>
+    <!-- Stores -->
+    <div class="container-fluid padding">
+    <div class="row welcome text-center">
+      <div class="col-12">
+        <h1 class="display-4">Available Stores</h1>
+      </div>
     </div>
-    </br>
-    </br>
-    <div class="container rounded">
-      <div class="col-md-12"></div>
-        <div class="row">
-          <div class="col-md-3">
-            <a href="vons"><img class"img-responsive img-thumbnail" src="static/hello/images/vons.png" style="width: 200px; height:200px"></a>
-          </div>
-          <div class="col-md-3">
-            <a href="smart&final"><img class"img-responsive img-thumbnail" src="static/hello/images/smart&final.png" style="width: 200px; height:200px"></a>
-          </div>
-          <div class="col-md-3">
-            <a href="wholefoods"><img class"img-responsive img-thumbnail" src="static/hello/images/wholefoods.png" style="width: 200px; height:200px"></a>
-          </div>
-          <div class="col-md-3">
-            <a href="traderjoes"><img class"img-responsive img-thumbnail" src="static/hello/images/traderjoes.png" style="width: 200px; height:200px"></a>
-          </div>
-          <div class="col-md-3">
-            <a href="food4less"><img class"img-responsive img-thumbnail" src="static/hello/images/food4less.png" style="width: 200px; height:200px"></a>
-          </div>
-          <div class="col-md-3">
-            <a href="ralphs"><img class"img-responsive img-thumbnail" src="static/hello/images/ralphs.png" style="width: 200px; height:200px"></a>
+    </div>
+
+    <div class="container-fluid padding">
+    <div class="row padding">
+      <div class="col-sm-3">
+        <div class="card">
+          <img class="card-img-top" src="static/hello/images/vons.png">
+          <div class="card-body">
+            <a href="vons" class="btn btn-outline-secondary">Shop at Vons</a>
           </div>
         </div>
-      <br/>
+      </div>
+      <div class="col-sm-3">
+        <div class="card">
+          <img class="card-img-top" src="static/hello/images/smart&final.png">
+          <div class="card-body">
+            <a href="smart&final" class="btn btn-outline-secondary">Shop at Smart & Final</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card">
+          <img class="card-img-top" src="static/hello/images/wholefoods.png">
+          <div class="card-body">
+            <a href="wholefoods" class="btn btn-outline-secondary">Shop at Whole Foods</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card">
+          <img class="card-img-top" src="static/hello/images/traderjoes.png">
+          <div class="card-body">
+            <a href="traderjoes" class="btn btn-outline-secondary">Shop at Trader Joe's</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card">
+          <img class="card-img-top" src="static/hello/images/food4less.png">
+          <div class="card-body">
+            <a href="food4less" class="btn btn-outline-secondary">Shop at Food 4 Less</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card">
+          <img class="card-img-top" src="static/hello/images/ralphs.png">
+          <div class="card-body">
+            <a href="ralphs" class="btn btn-outline-secondary">Shop at Ralphs</a>
+          </div>
+        </div>
+      </div>
     </div>
+    </div>
+
+    <!-- Footer -->
+    {% include 'hello/snippets/footer.html'%}
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
