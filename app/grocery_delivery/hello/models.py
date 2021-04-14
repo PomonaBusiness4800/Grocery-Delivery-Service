@@ -248,6 +248,7 @@ class Purchaseinfo(models.Model):
     auth_user = models.ForeignKey(User, models.DO_NOTHING, default=None)
     datetime = models.DateTimeField(db_column='dateTime', blank=True, null=True)  # Field name made lowercase.
     purchased = models.IntegerField(default=0)
+    address_useraddressid = models.ForeignKey(Address, models.DO_NOTHING, db_column='address_userAddressID', blank=True, null=True)
     def getPurchaseID(self): return self.purchaseid
     def getUserPaymentInfoID(self): return self.userpaymentinfo_paymentid.getUserPaymentInfoID()
     def getUserPaymentInfo(self): return self.userpaymentinfo_paymentid

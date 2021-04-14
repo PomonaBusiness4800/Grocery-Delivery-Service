@@ -204,6 +204,7 @@ class Purchaseinfo(models.Model):
     datetime = models.DateTimeField(db_column='dateTime', blank=True, null=True)  # Field name made lowercase.
     purchased = models.IntegerField(blank=True, null=True)
     auth_user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    address_useraddressid = models.ForeignKey(Address, models.DO_NOTHING, db_column='address_userAddressID', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
