@@ -243,6 +243,36 @@ def ralphsCats(request, cats):
     return render(request, 'hello/ralphs.html', {'stores':all_stores, 'items':all_items})
 
 @login_required(login_url='loginPage') # only logged in users can see this page
+def staterbros(request):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
+    return render(request, 'hello/staterbros.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
+
+@login_required(login_url='loginPage') # only logged in users can see this page
+def elsuper(request):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
+    return render(request, 'hello/elsuper.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
+
+@login_required(login_url='loginPage') # only logged in users can see this page
 def cart(request):
     context = {}
     all_items = Groceryitem.objects.all()

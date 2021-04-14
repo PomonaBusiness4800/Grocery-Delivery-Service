@@ -9,6 +9,7 @@
 <!-- Navigation -->
 {% include 'hello/snippets/navigationbar_home.html' %}
 
+<<<<<<< Updated upstream
 
 <!--Store Image-->
 <div class="container">
@@ -16,3 +17,41 @@
             <img src="{% static 'hello/images/staterbros.png' %}">
     </center>
 </div>
+=======
+<!--Store Image-->
+<div class="container">
+        <center>        
+                <img src="{% static 'hello/images/staterbros.png' %}">
+        </center>
+</div>
+
+<!--Categories and Search Bar-->
+{% include 'hello/snippets/searchbar_category.html' %}
+
+
+<div class="container">
+    <div class="row align-items-center">
+            {% for item in items %}
+                    {% if item.getStoreID == 7 %}
+                            <div class="col-md-3">
+                                    <img class="img-responsive img-thumbnail" src="{% static item.getDest %}" style="width:300px height:300px"> </br>
+                                    {{ item.getGroceryName }} </br>
+                                    Brand: {{ item.getBrand }} </br>
+                                    Category: {{ item.getCategory }} </br>
+                                    Price: ${{ item.getPrice }} </br>
+                                    {% if item.getStock > 10 %}
+                                            Stock: 10+ </br>
+                                    {% elif item.getStock <= 0 %}
+                                            Out of Stock! </br>
+                                    {% else %}
+                                            Stock: {{item.getStock}} </br>
+                                    {% endif %}
+                            </div>
+                    {% endif %} </br>
+            {% endfor %}
+    </div>
+</div>
+<!--Footer-->
+{% include 'hello/snippets/footer.html' %}
+{% endblock %}
+>>>>>>> Stashed changes
