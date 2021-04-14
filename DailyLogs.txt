@@ -91,3 +91,5 @@ Michael: add orderitem as an object into the database to be able to add items to
 Michael: finished first part of cart, items are displayed
 4/9/21
 Michael: will work on total price, and checkout button. Make things look better
+4/12/21
+Michael: total price and number of items at cart button work. Just need to work on checkout button
