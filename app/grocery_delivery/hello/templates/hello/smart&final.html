@@ -7,12 +7,22 @@
 
 {% block content %}
 <!-- Navigation -->
-{% include 'hello/snippets/navigationbar_home.html' with cartTotal=numberItems %}
+{% include 'hello/snippets/navigationbar_home.html' %}
 {% include 'hello/snippets/navigationbar_grocery.html' %}
+
+
+<!--Store Image-->
 <div class="container">
-        <center> 
-        <h1> Smart & Final </h1>
+        <center>        
+                <img src="{% static 'hello/images/smart&final.png' %}">
         </center>
+</div>
+
+<!--Categories and Search Bar-->
+{% include 'hello/snippets/searchbar_category.html' %}
+
+
+<div class="container">
         <div class="row align-items-center">
                 {% for item in items %}
                         {% if item.getStoreID == 2 %}

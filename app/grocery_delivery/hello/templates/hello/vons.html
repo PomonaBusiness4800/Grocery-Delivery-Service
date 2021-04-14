@@ -12,17 +12,18 @@
 {% include 'hello/snippets/navigationbar_grocery.html' %}
 <!--Carousel-->
 
+<!--Store Image-->
 <div class="container">
         <center>        
-                {% include 'hello/snippets/carousel_grocery.html' %}
+                <img src="{% static 'hello/images/vons.png' %}">
         </center>
 </div>
 
+<!--Categories and Search Bar-->
+{% include 'hello/snippets/searchbar_category.html' %}
+
 
 <div class="container">
-        <center> 
-        <h1> Vons </h1>
-        </center>
         <div class="row align-items-center">
                 {% for item in items %}
                         {% if item.getStoreID == 1 %}
