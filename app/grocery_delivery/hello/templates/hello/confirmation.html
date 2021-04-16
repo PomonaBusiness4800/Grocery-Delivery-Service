@@ -6,7 +6,7 @@
 <!-- Navigation -->
 {% include 'hello/snippets/navigationbar_home.html' with cartTotal=numberItems %}
 
-    <div class="container">
+<div class="container">
         <br>
         <center> 
         <h1> Checkout </h1>
@@ -36,35 +36,31 @@
             <p>Total Price: {{ totalPrice|floatformat:2 }}</p> 
             <br>
         </div>
-        <center> 
-        <h2> Choose address for delivery </h2>
-        </center>
-        <br>
-        <div class="row">
-            <div class="col-sm-6">
-                {% for item in addresses %}
-                <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
-                    <div class="card-header">Address</div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ item.getFirstName }} {{ item.getLastName }}</h5>
-                        <p class="card-text">{{ item.getStreetAddress }} <br> {{ item.getCity }}, {{ item.getState }} <br> {{ item.getZipCode }} <br></p>
-                        <a class="btn btn-primary" href="{% url 'payment' item.getUserAddressID %}">Use this address</a>
-                    </div>
-                </div>
+        <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+            <div class="card-header">Address</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ user_address.getFirstName }} {{ user_address.getLastName }}</h5>
+                <p class="card-text">{{ user_address.getStreetAddress }} <br> {{ user_address.getCity }}, {{ user_address.getState }} <br> {{ user_address.getZipCode }} <br></p>
             </div>
-            {% endfor %}
         </div>
         <br>
-    </div>
-    
-
-
-
-
-
-
-
-
+        <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+            <div class="card-header">Payment</div>
+            <div class="card-body">
+                <h5 class="card-title">Card Number: {{ order_payment.getCardNumber}}</h5>
+                <p class="card-text">{{ order_payment.getSecurityNumber }} <br> Exp date: {{ order_payment.getExpirationDate }} <br> Zip: {{ order_payment.getZipCode }}</p>
+            </div>
+        </div>
+        <br>
+        <div class="container" style="text-align: right">
+            <br>
+            <a class="btn btn-primary" href="{% url 'orderconfirmed' user_order.getPurchaseID %}">Confirm your order</a>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+</div>
 
 
 

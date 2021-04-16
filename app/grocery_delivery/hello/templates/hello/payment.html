@@ -11,6 +11,7 @@
         <center> 
         <h1> Checkout </h1>
         </center>
+        <br>
         {% for item in user_orders %}
                 {% for ob in all_orderitems %}
                     {% if item.getPurchaseID is ob.getPurchaseID %}
@@ -54,7 +55,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Card Number: {{ item.getCardNumber}}</h5>
                             <p class="card-text">{{ item.getSecurityNumber }} <br> Exp date: {{ item.getExpirationDate }} <br> Zip: {{ item.getZipCode }}</p>
-                            <a class="btn btn-primary" href="">Use this payment option</a>
+                            <a class="btn btn-primary" href="{% url 'confirmation' item.getPaymentID %}">Use this payment option</a>
                         </div>
                     </div>
               </div>

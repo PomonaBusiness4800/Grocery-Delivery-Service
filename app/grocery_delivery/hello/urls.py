@@ -32,4 +32,6 @@ urlpatterns = [
     path('cart/', views.cart, name="cart"),
     path('checkout/', views.checkout, name="checkout"),
     path('payment/<int:address>', views.payment, name="payment"),
+    path('confirmation/<int:payment>', views.confirmation, name="confirmation"),
+    path('orderconfirmed/<int:order>', views.orderconfirmed, name="orderconfirmed")
 ]

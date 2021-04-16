@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Sum
+import datetime
 
 @login_required(login_url='loginPage') # only logged in users can see this page
 def index(request):
@@ -17,7 +18,7 @@ def index(request):
     all_grocstoreaddresses = Grocerystoreadd.objects.all
     all_groceryitem = Groceryitem.objects.all
     all_items = Groceryitem.objects.all()
-    user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
     all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
     numberItems = 0
     for i in user_orders: # number of items in cart for user
@@ -32,7 +33,7 @@ def index(request):
 def vons(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all()
-    user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
     all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
     numberItems = 0
     for i in user_orders: # number of items in cart for user
@@ -47,9 +48,10 @@ def vonsAddCart(request, item_id):
     all_items = Groceryitem.objects.all()
     product = Groceryitem.objects.get(groceryid = item_id)
     all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
-    user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
+    all_user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
     store = product.grocerystore_storeid # for mysql you have to create many to many with a connecting table
-    user_order, status = Purchaseinfo.objects.get_or_create(grocerystore_storeid=store, auth_user = request.user) # to track the items in the order
+    user_order, status = Purchaseinfo.objects.get_or_create(grocerystore_storeid=store, auth_user = request.user, purchased = 0) # to track the items in the order
     order_item, status = PurchaseinfoHasGroceryitem.objects.get_or_create(purchaseinfo_purchaseid = user_order, groceryitem_groceryid = product) # purchaseinfo will have its id and the id of the orderitem #inside this new table, this is where the purchase info will have its list of items through the connecting table
     if status: 
         user_order.save()
@@ -65,7 +67,7 @@ def vonsAddCart(request, item_id):
 def vonsSearch(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all()
-    user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
     all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
     numberItems = 0
     for i in user_orders: # number of items in cart for user
@@ -88,7 +90,7 @@ def vonsCats(request, cats):
     all_items = Groceryitem.objects.filter(category = cats)
     all_itemss = Groceryitem.objects.all()
     all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
-    user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
     numberItems = 0
     for i in user_orders: # number of items in cart for user
         for j in all_orderitems:
@@ -103,7 +105,7 @@ def smart_final(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all()
     all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
-    user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
     numberItems = 0
     for i in user_orders: # number of items in cart for user
         for j in all_orderitems:
@@ -113,26 +115,47 @@ def smart_final(request):
                         numberItems = numberItems + 1
     return render(request, 'hello/smart&final.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 def smart_finalSearch(request):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
     if request.method == "POST":
         searchkey = request.POST['searchkey']
         all_stores = Grocerystore.objects.all
         all_items = Groceryitem.objects.filter(groceryname__icontains = searchkey)
-        return render(request, 'hello/smart&final.html', {'stores':all_stores, 'items':all_items})
+        return render(request, 'hello/smart&final.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
     else: 
         all_stores = Grocerystore.objects.all
         all_items = Groceryitem.objects.all
-        return render(request, 'hello/smart&final.html', {'stores':all_stores, 'items':all_items})
+        return render(request, 'hello/smart&final.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 def smartCats(request, cats):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.filter(category = cats)
-    return render(request, 'hello/smart&final.html', {'stores':all_stores, 'items':all_items})
+    all_itemss = Groceryitem.objects.all()
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_itemss:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
+    return render(request, 'hello/smart&final.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 
 @login_required(login_url='loginPage') # only logged in users can see this page
 def wholefoods(request):
     all_stores = Grocerystore.objects.all
     all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
     all_items = Groceryitem.objects.all()
-    user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
     numberItems = 0
     for i in user_orders: # number of items in cart for user
         for j in all_orderitems:
@@ -142,26 +165,47 @@ def wholefoods(request):
                         numberItems = numberItems + 1
     return render(request, 'hello/wholefoods.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 def wholefoodsSearch(request):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
     if request.method == "POST":
         searchkey = request.POST['searchkey']
         all_stores = Grocerystore.objects.all
         all_items = Groceryitem.objects.filter(groceryname__icontains = searchkey)
-        return render(request, 'hello/wholefoods.html', {'stores':all_stores, 'items':all_items})
+        return render(request, 'hello/wholefoods.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
     else: 
         all_stores = Grocerystore.objects.all
         all_items = Groceryitem.objects.all
-        return render(request, 'hello/wholefoods.html', {'stores':all_stores, 'items':all_items})
+        return render(request, 'hello/wholefoods.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 def wholefoodsCats(request, cats):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.filter(category = cats)
-    return render(request, 'hello/wholefoods.html', {'stores':all_stores, 'items':all_items})
+    all_itemss = Groceryitem.objects.all()
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_itemss:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
+    return render(request, 'hello/wholefoods.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 
 @login_required(login_url='loginPage') # only logged in users can see this page
 def traderjoes(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all()
     all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
-    user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
     numberItems = 0
     for i in user_orders: # number of items in cart for user
         for j in all_orderitems:
@@ -171,25 +215,46 @@ def traderjoes(request):
                         numberItems = numberItems + 1
     return render(request, 'hello/traderjoes.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 def traderjoesSearch(request):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
     if request.method == "POST":
         searchkey = request.POST['searchkey']
         all_stores = Grocerystore.objects.all()
         all_items = Groceryitem.objects.filter(groceryname__icontains = searchkey)
-        return render(request, 'hello/traderjoes.html', {'stores':all_stores, 'items':all_items})
+        return render(request, 'hello/traderjoes.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
     else: 
         all_stores = Grocerystore.objects.all
         all_items = Groceryitem.objects.all
-        return render(request, 'hello/traderjoes.html', {'stores':all_stores, 'items':all_items})
+        return render(request, 'hello/traderjoes.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 def traderjoesCats(request, cats):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.filter(category = cats)
-    return render(request, 'hello/traderjoes.html', {'stores':all_stores, 'items':all_items})
+    all_itemss = Groceryitem.objects.all()
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_itemss:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
+    return render(request, 'hello/traderjoes.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 @login_required(login_url='loginPage') # only logged in users can see this page
 def food4less(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all()
     all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
-    user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
     numberItems = 0
     for i in user_orders: # number of items in cart for user
         for j in all_orderitems:
@@ -199,22 +264,54 @@ def food4less(request):
                         numberItems = numberItems + 1
     return render(request, 'hello/food4less.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 def food4lessSearch(request):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
     if request.method == "POST":
         searchkey = request.POST['searchkey']
         all_stores = Grocerystore.objects.all
         all_items = Groceryitem.objects.filter(groceryname__icontains = searchkey)
-        return render(request, 'hello/food4less.html', {'stores':all_stores, 'items':all_items})
+        return render(request, 'hello/food4less.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
     else: 
         all_stores = Grocerystore.objects.all
         all_items = Groceryitem.objects.all
-        return render(request, 'hello/food4less.html', {'stores':all_stores, 'items':all_items})
+        return render(request, 'hello/food4less.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 def food4lessCats(request, cats):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.filter(category = cats)
-    return render(request, 'hello/food4less.html', {'stores':all_stores, 'items':all_items})
+    all_itemss = Groceryitem.objects.all()
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_itemss:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
+    return render(request, 'hello/food4less.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 
 @login_required(login_url='loginPage') # only logged in users can see this page
 def ralphs(request):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all()
     all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
@@ -232,21 +329,31 @@ def ralphsSearch(request):
         searchkey = request.POST['searchkey']
         all_stores = Grocerystore.objects.all
         all_items = Groceryitem.objects.filter(groceryname__icontains = searchkey)
-        return render(request, 'hello/ralphs.html', {'stores':all_stores, 'items':all_items})
+        return render(request, 'hello/ralphs.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
     else: 
         all_stores = Grocerystore.objects.all
         all_items = Groceryitem.objects.all
-        return render(request, 'hello/ralphs.html', {'stores':all_stores, 'items':all_items})
+        return render(request, 'hello/ralphs.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 def ralphsCats(request, cats):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.filter(category = cats)
-    return render(request, 'hello/ralphs.html', {'stores':all_stores, 'items':all_items})
+    all_itemss = Groceryitem.objects.all()
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_itemss:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
+    return render(request, 'hello/ralphs.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 
 @login_required(login_url='loginPage') # only logged in users can see this page
 def staterbros(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all()
-    user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
     all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
     numberItems = 0
     for i in user_orders: # number of items in cart for user
@@ -261,7 +368,7 @@ def staterbros(request):
 def elsuper(request):
     all_stores = Grocerystore.objects.all
     all_items = Groceryitem.objects.all()
-    user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
     all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
     numberItems = 0
     for i in user_orders: # number of items in cart for user
@@ -276,10 +383,16 @@ def elsuper(request):
 def cart(request):
     context = {}
     all_items = Groceryitem.objects.all()
-    user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
     all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
-    numberItems = PurchaseinfoHasGroceryitem.objects.count()
+    numberItems = 0
     totalPrice = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
     for i in user_orders:
         for j in all_orderitems:
             if i.getPurchaseID() is j.getPurchaseID():
@@ -298,9 +411,15 @@ def cart(request):
 def checkout(request): # choose address and payment option show total price
     context = {}
     all_items = Groceryitem.objects.all()
-    user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
     all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
-    numberItems = PurchaseinfoHasGroceryitem.objects.count()
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
     addresses = Address.objects.filter(auth_user = request.user)
     payments = Userpaymentinfo.objects.filter(auth_user = request.user)
     totalPrice = 0
@@ -318,16 +437,24 @@ def checkout(request): # choose address and payment option show total price
     context['addresses'] = addresses
     context['payments'] = payments
     return render(request, 'hello/checkout.html', context)
+
+@login_required(login_url='loginPage') # only logged in users can see this page
 def payment(request, address): # chosen address and now prompt user for payment 
     context = {}
     all_items = Groceryitem.objects.all()
-    user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
     all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
-    numberItems = PurchaseinfoHasGroceryitem.objects.count()
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
     addresses = Address.objects.filter(auth_user = request.user)
     payments = Userpaymentinfo.objects.filter(auth_user = request.user)
     totalPrice = 0
-    user_order = Purchaseinfo.objects.get(auth_user = request.user)
+    user_order = Purchaseinfo.objects.get(auth_user = request.user, purchased = 0)
     user_address = Address.objects.get(useraddressid=address)
     user_order.address_useraddressid = user_address
     for i in user_orders:
@@ -346,6 +473,80 @@ def payment(request, address): # chosen address and now prompt user for payment
     context['user_address'] = user_address
     user_order.save()
     return render(request, 'hello/payment.html', context)
+
+@login_required(login_url='loginPage') # only logged in users can see this page
+def confirmation(request, payment):
+    context = {}
+    all_items = Groceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
+    order_payment = Userpaymentinfo.objects.get(paymentid=payment)
+    totalPrice = 0
+    user_order = Purchaseinfo.objects.get(auth_user = request.user, purchased =0 )
+    user_address = user_order.address_useraddressid
+    user_order.userpaymentinfo_paymentid = order_payment
+    for i in user_orders:
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        totalPrice = totalPrice + m.getPrice()
+    context['totalPrice'] = totalPrice
+    context['all_orderitems'] = all_orderitems
+    context['all_items'] = all_items
+    context['user_orders'] = user_orders
+    context['user_order'] = user_order
+    context['numberItems'] = numberItems
+    context['user_address'] = user_address
+    context['order_payment'] = order_payment
+    user_order.save()
+    return render(request, 'hello/confirmation.html', context)
+    
+def orderconfirmed(request, order):
+    context = {}
+    all_items = Groceryitem.objects.all()
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
+    user_order = Purchaseinfo.objects.get(purchaseid=order)
+    user_address = user_order.address_useraddressid
+    order_payment = user_order.userpaymentinfo_paymentid
+    totalPrice = 0
+    totalItems = 0
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
+    for j in all_orderitems:
+            if user_order.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        totalItems = totalItems + 1
+                        totalPrice = totalPrice + m.getPrice()
+    user_order.totalprice = totalPrice
+    user_order.totalitems = totalItems
+    user_order.datetime = datetime.datetime.now()
+    user_order.purchased = 1
+    context['all_orderitems'] = all_orderitems
+    context['all_items'] = all_items
+    context['totalPrice'] = totalPrice
+    context['user_order'] = user_order
+    context['user_orders'] = user_orders
+    context['user_address'] = user_address
+    context['numberItems'] = numberItems
+    context['order_payment'] = order_payment
+    user_order.save()
+    return render(request,'hello/orderconfirmed.html', context)
+
 @login_required(login_url='loginPage') # only logged in users can see this page
 def userprofile(request):
     context = {}

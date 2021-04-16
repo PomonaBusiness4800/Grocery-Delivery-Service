@@ -10,9 +10,11 @@
 {% include 'hello/snippets/navigationbar_home.html' with cartTotal=numberItems %}
 
 <div class="container">
+        <br>
         <center> 
         <h1> Cart </h1>
         </center>
+        <br>
             {% for item in user_orders %}
                 {% for ob in all_orderitems %}
                     {% if item.getPurchaseID is ob.getPurchaseID %}
