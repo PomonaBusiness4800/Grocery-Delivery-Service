@@ -7,7 +7,7 @@
 
 {% block content %}
 <!-- Navigation -->
-{% include 'hello/snippets/navigationbar_home.html' %}
+{% include 'hello/snippets/navigationbar_home.html' with cartTotal=numberItems %}
 
 <!--Store Image-->
 <div class="container">
@@ -36,6 +36,7 @@
                                     {% else %}
                                             Stock: {{item.getStock}} </br>
                                     {% endif %}
+                                    <a class="btn btn-primary" href="{% url 'food4lessAddCart' item.getGroceryID %}">Add to cart</a>
                             </div>
                     {% endif %} </br>
             {% endfor %}
