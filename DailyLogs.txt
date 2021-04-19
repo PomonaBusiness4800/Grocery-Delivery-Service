@@ -101,3 +101,5 @@ Michael: will work on checkout confirmation and finish up checkout process
 Michael: checkout process is complete. All these processes are only working for vons
 4/16/21:
 Michael: will work on orders page. Add to cart for every store.
+4/19/21:
+Michael: will work on orders page. add to cart for every store is done except the two new stores. Will complete the two new stores. new more items in some stores
