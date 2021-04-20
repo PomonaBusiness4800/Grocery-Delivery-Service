@@ -253,10 +253,13 @@ class Purchaseinfo(models.Model):
     def getUserPaymentInfoID(self): return self.userpaymentinfo_paymentid.getUserPaymentInfoID()
     def getUserPaymentInfo(self): return self.userpaymentinfo_paymentid
     def getStoreID(self): return self.grocerystore_storeid.getStoreID()
+    def getStoreName(self): return self.grocerystore_storeid.getStoreName()
     def getStoreInfo(self): return self.grocerystore_storeid
     def getTotalPrice(self): return self.totalprice
     def getTotalItems(self): return self.totalitems
-
+    def getDateTime(self): return self.datetime
+    def getAddress(self): return self.address_useraddressid
+    
     def __str__(self):
         return 'Total Items Bought: ' + self.totalitems + '\nTotal Price: ' + self.totalprice + '\nTime of Purchase: ' + self.date + ' ' + self.time
     class Meta:

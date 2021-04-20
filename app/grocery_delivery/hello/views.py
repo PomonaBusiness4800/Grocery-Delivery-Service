@@ -645,6 +645,24 @@ def orderconfirmed(request, order):
     user_order.save()
     return render(request,'hello/orderconfirmed.html', context)
 
+def orders(request):
+    context = {}
+    all_items = Groceryitem.objects.all()
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
+    all_user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 1)
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
+    context['numberItems'] = numberItems
+    context['user_orders'] = user_orders
+    context['all_user_orders'] = all_user_orders
+    return render(request,'hello/orders.html', context)
+
 @login_required(login_url='loginPage') # only logged in users can see this page
 def userprofile(request):
     context = {}
