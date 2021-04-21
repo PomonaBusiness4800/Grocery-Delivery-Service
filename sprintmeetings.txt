@@ -1,1 +1,147 @@
+2/16: went over technologies, questions to ask professor regarding what is needed
+questions to ask: can we use wix? what is middleware? is it just the website/ do we need a seperate mobile application? daily logs for each person?
+front end: html, css, javascript
+backend: ruby python php, sql, java
+middleware: ???
 
+mobile: Android Studio, Cordova
+
+2/17: Discussed different technologies after class:
+
+possible combinations to research: 
+bootstrap django mysql
+react express/node mongodb
+
+2/18: Decided on Bootstrap, Django, mySQL for front end, middle and back end. Web hosting tech: Firebase vs AWS vs WIX
+
+2/19: Need to implement system requirements, will research over the weekend
+
+2/22: discussed system specifications, working on it the rest of the week, professor proofreads on friday
+
+2/23: adding more to SRS document, working on Scope, structure, Assumption and dependencies, requirements
+
+2/24: finish SRS document by friday, research database management.
+going to try to connect bootstrap, django, mysql and AWS
+
+2/25: AWS account created, Crypto implementation? temporary name: instabasket, plan on windows implementation. SRS document is finished
+
+2/26: get mysql working over the weekend individually, look into dbms more, add fr and nr tags to the document
+
+3/1: mySQL database is up. Work on data model due on Friday: includes ER (entity relationship) model and Database. For tomorrow's meeting: list out possible entities and attributes in the doc linked in the links channel
+
+3/2: Talked about how to connect to mySQL database, entities and attributes are complete, work on diagrams using draw.io/workbench, working on ER model tomorrow
+
+3/3: Work on Data and relational models, tomorrow finish placing everything in database
+ 
+3/4: draw.io, entities and attributes doc, and tables in mySQL are finished. For tomorrow: finish database tweaking, linking foreign keys and adding mock data into database
+
+3/5: web portal assigned, tune database with mock data, fix er diagram: keys should be underlined
+
+3/8: Finish putting mock data into database
+
+3/9: Finish up mock data, figure out how to pull info from database onto site. Ask Professor for what he wants on friday
+
+3/10: Same as yesterday, also try to stylize the webservice using HTML/CSS
+
+3/11: Add visuals to the webservice (html, css, bootstrap), connect database to webservice for tomorrow
+
+3/12: Work on Store View, learn HTML/Styling over weekend, come up with design. Name chosen for webservice: InstaBasket
+
+3/15: Learn HTML, Implement StoreView using Database, focus on Vons as first StoreView
+
+3/16: No meeting
+3/17: Continue to work on Storeview, Need to change name
+
+3/18: Set up storeview for viewing tomorrow
+
+3/19
+Assignment:
+Finish the rest of the stores
+Refine Storeview
+Add a List of Stores page (frontpage, instacart like)
+Implement Images to items and store pages
+Start on cart/order page
+
+3/22: Same as Friday Meeting Updates
+
+3/23: Add functionality to different features on the site. Categories, Search function
+
+3/24: Same as 3/23 and 3/19
+
+3/25: See what professor wants next, same as 3/23 
+Finish the rest of the stores
+Implement Images to items and store pages
+Implement Images to items and store pages
+Refine Storeview
+Add functionality to Categories/search function
+Start on cart/order page
+Add more items to the database
+
+Spring Break/Week After:
+Refine Storeview
+Add functionality to Categories/search function
+Start on cart/order page
+Add more items to the database
+
+4/5: Same as 3/26
+
+4/6: 
+Refine Storeview
+Add functionality to Categories/search function
+Start on cart/order page
+Finish filling out Database
+
+4/7: Same as 4/6
+
+4/9:
+Refine Storeview
+Make sure everything is neat
+Add functionality to Categories/search function
+Start on cart/order page
+Finish filling out Database
+
+4/12:
+refine storeview
+work on checkout button
+images for storeview
+work on aesthetics
+
+4/13:
+refine storeview
+work on checkout button
+Add more items to some of the stores (Whole Foods... etc)
+Add new Stores (EL SUPER, Stater Bros)
+work on aesthetics
+
+4/14: 
+Continue to work on storeview
+Checkout almost finished
+Finish implementing new stores
+Add new items to the store (whole foods... etc)
+Figure out how to do delivery driver stuff
+Work on look of the site
+
+4/15:
+Continue to work on storeview
+Checkout almost finished
+Finish implementing new stores
+Add new items to the store (whole foods... etc)
+Figure out how to do delivery driver stuff
+Work on look of the site
+
+4/16:
++Order Status page
++Delivery Updates
++Figure out WIX Site
++Daily Logs
+Add new items to the store (whole foods... etc)
+Figure out how to do delivery driver stuff
+Work on look of the site
+
+4/19:
+-Order Status page
+-Delivery Updates (next week)
+-Figure out WIX Site
+-Daily Logs (compile and put onto WIX) 
+-Add new items to the store (whole foods... etc)
+-Work on look of the site
