@@ -401,6 +401,17 @@ def ralphs(request):
                         numberItems = numberItems + 1
     return render(request, 'hello/ralphs.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 def ralphsSearch(request):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
     if request.method == "POST":
         searchkey = request.POST['searchkey']
         all_stores = Grocerystore.objects.all
@@ -461,7 +472,63 @@ def staterbros(request):
                     if j.getGroceryID() is m.getGroceryID():
                         numberItems = numberItems + 1
     return render(request, 'hello/staterbros.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
-
+def staterbrosSearch(request):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
+    if request.method == "POST":
+        searchkey = request.POST['searchkey']
+        all_stores = Grocerystore.objects.all
+        all_items = Groceryitem.objects.filter(groceryname__icontains = searchkey)
+        return render(request, 'hello/staterbros.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
+    else: 
+        all_stores = Grocerystore.objects.all
+        all_items = Groceryitem.objects.all
+        return render(request, 'hello/staterbros.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
+def staterbrosCats(request, cats):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.filter(category = cats)
+    all_itemss = Groceryitem.objects.all()
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_itemss:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
+    return render(request, 'hello/staterbros.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
+def staterbrosAddCart(request, item_id):
+    print("addtocart")
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.all()
+    product = Groceryitem.objects.get(groceryid = item_id)
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
+    all_user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
+    store = product.grocerystore_storeid # for mysql you have to create many to many with a connecting table
+    user_order, status = Purchaseinfo.objects.get_or_create(grocerystore_storeid=store, auth_user = request.user, purchased = 0) # to track the items in the order
+    order_item, status = PurchaseinfoHasGroceryitem.objects.get_or_create(purchaseinfo_purchaseid = user_order, groceryitem_groceryid = product) # purchaseinfo will have its id and the id of the orderitem #inside this new table, this is where the purchase info will have its list of items through the connecting table
+    if status: 
+        user_order.save()
+        order_item.save()
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
+    return render(request, 'hello/staterbros.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 @login_required(login_url='loginPage') # only logged in users can see this page
 def elsuper(request):
     all_stores = Grocerystore.objects.all
@@ -476,7 +543,63 @@ def elsuper(request):
                     if j.getGroceryID() is m.getGroceryID():
                         numberItems = numberItems + 1
     return render(request, 'hello/elsuper.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
-
+def elsuperSearch(request):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
+    if request.method == "POST":
+        searchkey = request.POST['searchkey']
+        all_stores = Grocerystore.objects.all
+        all_items = Groceryitem.objects.filter(groceryname__icontains = searchkey)
+        return render(request, 'hello/elsuper.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
+    else: 
+        all_stores = Grocerystore.objects.all
+        all_items = Groceryitem.objects.all
+        return render(request, 'hello/elsuper.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
+def elsuperCats(request, cats):
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.filter(category = cats)
+    all_itemss = Groceryitem.objects.all()
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_itemss:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
+    return render(request, 'hello/elsuper.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
+def elsuperAddCart(request, item_id):
+    print("addtocart")
+    all_stores = Grocerystore.objects.all
+    all_items = Groceryitem.objects.all()
+    product = Groceryitem.objects.get(groceryid = item_id)
+    all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
+    user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
+    all_user_orders = Purchaseinfo.objects.filter(auth_user = request.user)
+    store = product.grocerystore_storeid # for mysql you have to create many to many with a connecting table
+    user_order, status = Purchaseinfo.objects.get_or_create(grocerystore_storeid=store, auth_user = request.user, purchased = 0) # to track the items in the order
+    order_item, status = PurchaseinfoHasGroceryitem.objects.get_or_create(purchaseinfo_purchaseid = user_order, groceryitem_groceryid = product) # purchaseinfo will have its id and the id of the orderitem #inside this new table, this is where the purchase info will have its list of items through the connecting table
+    if status: 
+        user_order.save()
+        order_item.save()
+    numberItems = 0
+    for i in user_orders: # number of items in cart for user
+        for j in all_orderitems:
+            if i.getPurchaseID() is j.getPurchaseID():
+                for m in all_items:
+                    if j.getGroceryID() is m.getGroceryID():
+                        numberItems = numberItems + 1
+    return render(request, 'hello/elsuper.html', {'stores':all_stores, 'items':all_items, 'numberItems':numberItems})
 @login_required(login_url='loginPage') # only logged in users can see this page
 def cart(request):
     context = {}
