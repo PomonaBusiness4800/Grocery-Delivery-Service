@@ -105,3 +105,7 @@ Michael: will work on orders page. Add to cart for every store.
 Michael: will work on orders page. add to cart for every store is done except the two new stores. Will complete the two new stores. new more items in some stores
 4/20/21:
 Michael: orders page added. need to do orders status. will configure last two stores.
+4/21/21:
+Michael: orders page have statuses. just need to figure how status will work. will configure last two stores
+4/22/21
+Michael: last two stores are configured and work like all other stores. Still need to findout how the order statuses will work. order statuses can be created with every order completion. 
