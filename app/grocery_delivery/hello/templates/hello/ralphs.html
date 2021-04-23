@@ -1,11 +1,11 @@
 {% extends 'hello/base.html' %}
 {% load static %}
 
-{% block css %}
-    <link href="hello/style.css" rel="stylesheet"> 
-{% endblock %}
-
 {% block content %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/items.css' %}"/>
+</head>
 <!-- Navigation -->
 {% include 'hello/snippets/navigationbar_home.html' with cartTotal=numberItems %}
 
@@ -19,31 +19,38 @@
 <!--Categories and Search Bar-->
 {% include 'hello/snippets/searchbar_category.html' %}
 
+<body>
 
-<div class="container">
-    <div class="row align-items-center">
-            {% for item in items %}
-                    {% if item.getStoreID == 6 %}
-                            <div class="col-md-3">
-                                    <img class="img-responsive img-thumbnail" src="{% static item.getDest %}" style="width:300px height:300px"> </br>
-                                    {{ item.getGroceryName }} </br>
-                                    Brand: {{ item.getBrand }} </br>
-                                    Category: {{ item.getCategory }} </br>
-                                    Price: ${{ item.getPrice }} </br>
-                                    {% if item.getStock > 10 %}
-                                            Stock: 10+ </br>
-                                    {% elif item.getStock <= 0 %}
-                                            Out of Stock! </br>
-                                    {% else %}
-                                            Stock: {{item.getStock}} </br>
-                                    {% endif %}
-                                    <a class="btn btn-primary" href="{% url 'ralphsAddCart' item.getGroceryID %}">Add to cart</a>
-                            </div>
-                    {% endif %} </br>
-            {% endfor %}
-    </div>
+<div class="container-fluid padding">
+<div class="row padding">
+        {% for item in items %}
+                {% if item.getStoreID == 6 %}
+                        <div class="col-md-3 padding_items">
+                        <div class="card">
+                                <img class="card-img-top items_picture" src="{% static item.getDest %}">
+                                <div class="card-body">
+                                <hr>
+                                        <h4 class="card-title">${{ item.getPrice }}</h4>
+                                        <p>{{ item.getGroceryName }} </br>
+                                        {% if item.getStock > 10 %}
+                                                Stock: 10+ </br>
+                                        {% elif item.getStock <= 0 %}
+                                                Out of Stock! </br>
+                                        {% else %}
+                                                Stock: {{item.getStock}} </br>
+                                        {% endif %}
+                                        </p>
+                                    <a class="btn btn-outline-secondary" href="{% url 'ralphsAddCart' item.getGroceryID %}">Add to cart</a>
+                                </div>
+                        </div>
+                        </div>
+                {% endif %}
+        {% endfor %}
 </div>
+</div>
+
+</body>
+
 <!--Footer-->
 {% include 'hello/snippets/footer.html' %}
 {% endblock %}
-
