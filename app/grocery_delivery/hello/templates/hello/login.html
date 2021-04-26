@@ -7,7 +7,7 @@
     <br/><br/>
     <hr/>
     <br/><br/>
-    <div style="text-align: center; align-content: center; background-color: aquamarine; border-radius: 10px; padding: 25px">
+    <div style="text-align: center; align-content: center; background-color: aquamarine; border-radius: 10px; padding: 35px">
         <form method="POST" action="" class="row g-3 justify-content-start">
             {%csrf_token%}
             <div class="col-6">
@@ -29,6 +29,10 @@
         {% for message in messages %}
             <p id="message"> {{message}} </p>
         {% endfor %}
+        <div style="float: right;">
+            Do not have an account?
+            <a href="{% url 'register' %}">Create account here</a>
+        </div>
     </div>
 </div>
     
