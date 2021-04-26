@@ -111,3 +111,5 @@ Michael: orders page have statuses. just need to figure how status will work. wi
 Michael: last two stores are configured and work like all other stores. Still need to findout how the order statuses will work. order statuses can be created with every order completion. 
 4/23/21:
 Michael: work on orders statuses with timers and step by step order statuses. Add create account on login. make login page look better
+4/26/21:
+Michael: order statuses for orders. and maybe make account creation look better
