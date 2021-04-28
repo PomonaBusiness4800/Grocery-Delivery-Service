@@ -115,3 +115,5 @@ Michael: work on orders statuses with timers and step by step order statuses. Ad
 Michael: order statuses for orders. and maybe make account creation look better
 4/27/21:
 Michael: order statuses done. figure out adding to payments formatting
+4/28/21:
+michael: figure out cart quantity, figure out adding payments formatting
