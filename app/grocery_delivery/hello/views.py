@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Grocerystore, Userpaymentinfo, Address, Deliverydriver, Grocerystoreadd, Groceryitem, Purchaseinfo, PurchaseinfoHasGroceryitem
+from .models import Grocerystore, Userpaymentinfo, Address, Deliverydriver, Grocerystoreadd, Groceryitem, Purchaseinfo, PurchaseinfoHasGroceryitem, Orderstatus
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm, addAddressForm, addPaymentForm
@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Sum
 import datetime
+from django.utils import timezone
 
 @login_required(login_url='loginPage') # only logged in users can see this page
 def index(request):
@@ -753,9 +754,12 @@ def orderconfirmed(request, order):
                     if j.getGroceryID() is m.getGroceryID():
                         totalItems = totalItems + 1
                         totalPrice = totalPrice + m.getPrice()
+    orderstatus, status = Orderstatus.objects.get_or_create(purchaseinfo_purchaseid=user_order, ordertime=timezone.now(), archive = 0)
+    if status: 
+        orderstatus.save()
     user_order.totalprice = totalPrice
     user_order.totalitems = totalItems
-    user_order.datetime = datetime.datetime.now()
+    user_order.datetime = timezone.now()
     user_order.purchased = 1
     context['all_orderitems'] = all_orderitems
     context['all_items'] = all_items
@@ -774,6 +778,9 @@ def orders(request):
     all_orderitems = PurchaseinfoHasGroceryitem.objects.all()
     user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 0)
     all_user_orders = Purchaseinfo.objects.filter(auth_user = request.user, purchased = 1)
+    order_statuses = Orderstatus.objects.all()
+    unarchived_statuses = Orderstatus.objects.filter(archive = 0)
+    current_time = timezone.now()
     numberItems = 0
     for i in user_orders: # number of items in cart for user
         for j in all_orderitems:
@@ -781,9 +788,29 @@ def orders(request):
                 for m in all_items:
                     if j.getGroceryID() is m.getGroceryID():
                         numberItems = numberItems + 1
+    for i in unarchived_statuses:
+        time = timezone.now() - i.ordertime
+        print(time.seconds)
+        minutes = (time.seconds//60)%60
+        if (minutes < 3): # here is where the order statuses will be determined if not already
+            i.status = "Order Processing"
+            print("order processing")
+        if ((minutes < 6) and (minutes > 3)):
+            i.status = "Order in Progress"
+            print("order in progress")
+        if ((minutes < 25) and (minutes > 6)):
+            i.status = "Order in Delivery"
+            print("order in delivery")
+        if ((minutes > 25)):
+            i.status = "Order Delivered"
+            i.archive = 1
+            print("order delivered") # also change the order status to archived
+        i.save()
     context['numberItems'] = numberItems
     context['user_orders'] = user_orders
     context['all_user_orders'] = all_user_orders
+    context['order_statuses'] = order_statuses
+    context['current_time'] = current_time
     return render(request,'hello/orders.html', context)
 
 @login_required(login_url='loginPage') # only logged in users can see this page

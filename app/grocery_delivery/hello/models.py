@@ -223,10 +223,12 @@ class Grocerystoreadd(models.Model):
 class Orderstatus(models.Model):
     orderstatusid = models.AutoField(db_column='orderStatusID', primary_key=True)  # Field name made lowercase.
     purchaseinfo_purchaseid = models.ForeignKey('Purchaseinfo', models.DO_NOTHING, db_column='purchaseInfo_purchaseID')  # Field name made lowercase.
-    deliverydriver_driverid = models.ForeignKey(Deliverydriver, models.DO_NOTHING, db_column='deliveryDriver_driverID')  # Field name made lowercase.
-    status = models.CharField(max_length=45)
+    deliverydriver_driverid = models.ForeignKey(Deliverydriver, models.DO_NOTHING, db_column='deliveryDriver_driverID', blank=True, null=True)  # Field name made lowercase.
+    status = models.CharField(max_length=45, blank=True, null=True)
+    ordertime = models.DateTimeField(db_column='orderTime')  # Field name made lowercase.
+    archive = models.IntegerField(blank=True, null=True)
     def getOrderStatusID(self): return self.orderstatusid
-    def getPurchaseInfoID(self): return self.purchaseinfo_purchaseid.getPurchaseInfoID()
+    def getPurchaseInfoID(self): return self.purchaseinfo_purchaseid.getPurchaseID()
     def getPurchaseInfo(self): return self.purchaseinfo_purchaseid
     def getDeliveryDriverID(self): return self.deliverydriver_driverid.getDriverID()
     def getDeliverDriverInfo(self): return self.deliverydriver_driverid
