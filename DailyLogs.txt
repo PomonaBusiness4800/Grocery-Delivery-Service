@@ -113,3 +113,5 @@ Michael: last two stores are configured and work like all other stores. Still ne
 Michael: work on orders statuses with timers and step by step order statuses. Add create account on login. make login page look better
 4/26/21:
 Michael: order statuses for orders. and maybe make account creation look better
+4/27/21:
+Michael: order statuses done. figure out adding to payments formatting
