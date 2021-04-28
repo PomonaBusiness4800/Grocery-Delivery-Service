@@ -4,57 +4,25 @@
 
 
 <div class="text-center mt-5 container">
-    <form method="POST" action="" class="row g-3 justify-content-start" style="max-width:300px;margin:auto;">
+    <form method="POST" action="" class="row g-3 justify-content-start" style="max-width:480px;margin:auto;">
         {%csrf_token%}
         <img src="{% static 'hello/images/InstaBasketLogo.png' %}">
         <h1 class="h3 mb-3" font-weight-normal>Sign In</h1>
         <input type="text" class="form-control" name="username" placeholder="Username...">
         <input type="password" class="form-control" name="password" placeholder="Password...">
-        <div class="mt-3">
             <button class="btn btn-lg btn-primary btn-block"> Sign In</button>
-            <a href="{% url 'register' %}"><button class="btn btn-lg btn-primary btn-block">Register</button></a>
-        </div>
+
     </form>
+    
     {% for message in messages %}
     <p id="message"> {{message}} </p>
     {% endfor %}
-    
-</div>
-
-<div class="container">
-    <br/><br/>
-    <h1>Login</h1>
-    <br/><br/>
-    <hr/>
-    <br/><br/>
-    <div style="text-align: center; align-content: center; background-color: aquamarine; border-radius: 10px; padding: 35px">
-        <form method="POST" action="" class="row g-3 justify-content-start">
-            {%csrf_token%}
-            <div class="col-6">
-                <label class="form-label">Enter Username</label>
-            </div>
-            <div class="col-3">
-                <input type="text" class="form-control" name="username" placeholder="Username...">
-            </div>
-            <div class="col-6">
-                <label class="form-label">Enter Password</label>
-            </div>
-            <div class="col-3">
-                <input type="password" class="form-control" name="password" placeholder="Password...">
-            </div>
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>  
-        </form>
-        {% for message in messages %}
-            <p id="message"> {{message}} </p>
-        {% endfor %}
-        <div style="float: right;">
-            Do not have an account?
-            <a href="{% url 'register' %}">Create account here</a>
-        </div>
+    <div style="float: center;">
+        Don't have an account?
+        <a href="{% url 'register' %}" margin-inline: 10px >Create account here</a>
     </div>
 </div>
-    
+
+
 
 {% endblock %}
