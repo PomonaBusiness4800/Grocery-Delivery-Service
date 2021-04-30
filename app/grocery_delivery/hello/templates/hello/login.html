@@ -15,9 +15,9 @@
     </form>
     
     {% for message in messages %}
-    <p id="message"> {{message}} </p>
+    <p id="message" style="color: red"> {{message}} </p>
     {% endfor %}
-    <div style="float: center;">
+    <div style="float: center;color:red">
         Don't have an account?
         <a href="{% url 'register' %}" margin-inline: 10px >Create account here</a>
     </div>
