@@ -2,11 +2,11 @@
 {% load static %}
 {% block content %}
 
-
+<div style="background-image: url('{% static 'hello/images/carousel0.png' %}')">
 <div class="text-center mt-5 container">
     <form method="POST" action="" class="row g-3 justify-content-start" style="max-width:480px;margin:auto;">
         {%csrf_token%}
-        <img src="{% static 'hello/images/InstaBasketLogo.PNG' %}">
+        <img src="{% static 'hello/images/InstaBasketLogo.PNG' %}" style="padding: ">
         <h1 class="h3 mb-3" font-weight-normal>Sign In</h1>
         <input type="text" class="form-control" name="username" placeholder="Username...">
         <input type="password" class="form-control" name="password" placeholder="Password...">
@@ -22,7 +22,8 @@
         <a href="{% url 'register' %}" margin-inline: 10px >Create account here</a>
     </div>
 </div>
+</div>
 
 
-
+{% include 'hello/snippets/footer.html' %}
 {% endblock %}
