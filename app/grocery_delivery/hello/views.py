@@ -792,6 +792,7 @@ def orders(request):
         time = timezone.now() - i.ordertime
         print(time.seconds)
         minutes = (time.seconds//60)%60
+        print(minutes)
         if (minutes < 3): # here is where the order statuses will be determined if not already
             i.status = "Order Processing"
             print("order processing")
@@ -801,7 +802,7 @@ def orders(request):
         if ((minutes < 25) and (minutes > 6)):
             i.status = "Order in Delivery"
             print("order in delivery")
-        if ((minutes > 25)):
+        if ((minutes >= 25)):
             i.status = "Order Delivered"
             i.archive = 1
             print("order delivered") # also change the order status to archived
