@@ -121,3 +121,5 @@ Michael: figure out cart quantity, figure out adding payments formatting
 Michael: finished orders and service seems to be finished, Just work on some aesthetic views
 4/30/21:
 Michael: meeting with professor went well. He approves and we are done other than adding more aesthetic views
+5/5/21:
+Michael: work on final report testing part. Work on ceo report
