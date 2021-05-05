@@ -117,3 +117,7 @@ Michael: order statuses for orders. and maybe make account creation look better
 Michael: order statuses done. figure out adding to payments formatting
 4/28/21:
 Michael: figure out cart quantity, figure out adding payments formatting
+4/29/21:
+Michael: finished orders and service seems to be finished, Just work on some aesthetic views
+4/30/21:
+Michael: meeting with professor went well. He approves and we are done other than adding more aesthetic views
