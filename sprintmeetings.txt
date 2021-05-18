@@ -145,3 +145,48 @@ Work on look of the site
 -Daily Logs (compile and put onto WIX) 
 -Add new items to the store (whole foods... etc)
 -Work on look of the site
+
+4/20:
+-Order Status page
+-Delivery Updates (next week)
+-Figure out WIX Site
+-Daily Logs (compile and put onto WIX) 
+-Add new items to the store (whole foods... etc)
+-Work on look of the site
+
+4/21:
+-Finish polishing up the site
+-Daily Logs
+-WIX Site complete
+
+4/24:
+-Same as 4/21
+
+4/25:
+-Webservice is Finished
+-Polish Up Site
+
+4/26:
+-Webservice is Finished
+-Polish Up Site
+
+4/27:
+-Webservice is Finished
+-Polish Up Site
+
+4/28:
+-Webservice is Finished
+-Polish Up Site
+
+5/5:
+Webservice is complete
+Project Report Due 5/19
+Start on Powerpoint
+Get Daily Logs in
+
+
+5/7: what we need for final submission
+- Evaluation for each member
+- Daily Logs/Sprint meetings updated in github and WIX site
+- Repo in ZIP
+- Final Report
