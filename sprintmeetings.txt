@@ -164,19 +164,21 @@ Work on look of the site
 
 4/25:
 -Webservice is Finished
--Polish Up Site
+-Continue to Polish Up Site
 
 4/26:
 -Webservice is Finished
--Polish Up Site
+-Continue to Polish Up Site
+
 
 4/27:
 -Webservice is Finished
--Polish Up Site
+-Continue to Polish Up Site
+
 
 4/28:
 -Webservice is Finished
--Polish Up Site
+-Continue to Polish Up Site
 
 5/5:
 Webservice is complete

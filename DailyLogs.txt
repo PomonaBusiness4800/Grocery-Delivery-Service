@@ -53,82 +53,128 @@ William: Researched on Technologies on how it works, trying to figure out tech s
 
 3/1/21
 Michael: Set up mysql with django and AWS hosting for the database. Will start adding entities and attributes to doc for tomorrow.
+William: Working on data model, figure out how to add entities to google doc
+
 3/2/21
 Michael: Use entities to create EER model and relational models.
+William:Added entities to google doc, will also add attributes today and tomorrow
+
 3/3/21: 
 Michael: Will use the models to create the tables in the database.
+William:Worked on EER and relational models, start by creating the model in the database, Will link entities on mySQL
+
 3/4/21
 Michael: The tables are created in the database. Mock data will be created for the tables.
+William:Worked on EER and relational models, create the model in the database, Linked entities on mySQL
+
 3/5/21
-Michael: Adding data into databse to make it look better.
+Michael: Adding data into database to make it look better.
+William: Worked on EER and relational models, add data to database
 3/8/21
 Michael: continue to add data into database. Will upload framework code to simulate web service on github.
+William: Added items to database, linked entities to present
 3/9/21
 Michael: Added code for framework onto github and showed how to run it on virtual environment. For next meeting, will look into how to pull data from the databases onto the webpage
+William: Added more tables into the database including items, will work on adding more to data base tomorrow and finish part of the models
+
 3/10/21
 Michael: Pulled data from database onto website html page. look into Connecting full stack development onto AWS web service for tomorrow.
-3/11/21
+William: Added more items to database, finished Models
+
 Michael: Pull rest of data onto webpage. Connect full stack to AWS.
 3/12/21:
 Michael: mock up store view, look into some HTML. AWS is trash switching to heroku
+William: started to work on mock storeview using HTML and some bootstrap, implemented the structure of the site, with icon of the store page, categories and items
 3/15/21:
 Michael: work on ccount creation for users, store view html creations.
+William: Continued to work on mock storeview using HTML, set up basic layout using divs
 3/16/21: no meeting
 3/17/2021:
 Michael: fix database, continue login/account creation. maybe store list
+William: working on storeview, changed to vons, included storeview pictures
+
 3/18/2021
-Michael: finishjed login/account creation. 
+Michael: finished login/account creation. 
+William: working on vons storeview, will continue to add elements to the page
 3/19/2021
 Michael: bootstrapped page and uploaded to heroku. awork on account profile
+William: working on vons storeview, adding more bootstrap elements to the storeview, included categories for it
 3/22/21
 Michael: add user profile page
+William: finished mockup storeview, not actual storeview will work on it until actual store view is done
 3/23/21
 Michael: add user profile page. need to list out current addresses and payment infos
+William: having issues with connecting and running the virtual enviroment, will work on adding more items to the store for now. 
 3/24/21: 
 Michael:list out current addresse and payments. refine links and redirects
+William: having issues with connecting and running the virtual enviroment, will work on adding more items to the store for now. 
 3/25/21:
 Michael: finish catagories link.
+William: having issues with connecting and running the virtual enviroment, think about the names for the webservice
 3/26/21:
 Michael: Refresh store view page, complete search bar, cart addition, add more items to the store
+William: having issues with connecting and running the virtual enviroment, decided on instabasket, work on other parts of webservice including adding images and designing horizontal logo
+
 4/5/21:
 Michael: work on search bar and cart view
+William: adding to parts of webservice including adding images and designing logo for navbar
 4/6/21
 Michael: add categories to each store and finished the search for each store 
+William: Added more grocery items to the tables in mySQL
+
 4/7/21
 Michael: add orderitem as an object into the database to be able to add items to cart.
+William: Fixed issue with connecting to virtual enviroment, will start adding pages to the webservice including designing horizontal logo into navbar.
 4/8/21
 Michael: finished first part of cart, items are displayed
+William: Trying to implement carousel, but not functional yet, will work on it more this weekend.
 4/9/21
 Michael: will work on total price, and checkout button. Make things look better
+William: Added Carousel into snippets
 4/12/21
 Michael: total price and number of items at cart button work. Just need to work on checkout button
+William: Changed a few styling and fonts in stylesheet
 4/13/21
 Michael: checkout will be in two parts, address selection and payment selection, then confirmation. almost finish address selection and will start on payment selection
+William: Put search bar and categories into snippets to make it cleaner to reuse that portion, changed all storeviews and replaced with snippets
 4/14/21
 Michael: will work on checkout confirmation and finish up checkout process
+William: made new instabasket icon for navbar, will work on improving navbar functionality and look for the next week to replace our old navbar.
 4/15/21:
 Michael: checkout process is complete. All these processes are only working for vons
+William: made dropdown for accounts on navbar linking to account.html, changed coloring of it, will continue to work on navbar
 4/16/21:
 Michael: will work on orders page. Add to cart for every store.
+William: made dropdown for accounts on navbar, changed coloring of it, will continue to work on navbar
 4/19/21:
 Michael: will work on orders page. add to cart for every store is done except the two new stores. Will complete the two new stores. new more items in some stores
 4/20/21:
 Michael: orders page added. need to do orders status. will configure last two stores.
+William: Finished improvements to navbar, implemented it into all stores, navbar has items to the right of the page, new logo, and better functionality
 4/21/21:
 Michael: orders page have statuses. just need to figure how status will work. will configure last two stores
+William: Cleaned up files, added food4less and elsuper, removed carousel snippet
 4/22/21
-Michael: last two stores are configured and work like all other stores. Still need to findout how the order statuses will work. order statuses can be created with every order completion. 
+Michael: last two stores are configured and work like all other stores. Still need to findout how the order statuses will work. order statuses can be created with every order completion.
+William: Added items to new store, will work on the look of the log in page.  
 4/23/21:
 Michael: work on orders statuses with timers and step by step order statuses. Add create account on login. make login page look better
+William: Changed elements of login, erased previous login page and made a new one with bootstrap
 4/26/21:
 Michael: order statuses for orders. and maybe make account creation look better
+William: Changed Account html to look better, added better colors/new format
 4/27/21:
 Michael: order statuses done. figure out adding to payments formatting
+William: Compiled sprint meetings notes and added all to github
 4/28/21:
 Michael: figure out cart quantity, figure out adding payments formatting
+William: Cleaned up Files for presentation and submission, deleted and got rid of files we did not need, updated sprint meeting notes/compiled
 4/29/21:
 Michael: finished orders and service seems to be finished, Just work on some aesthetic views
+William: Testing to make sure the webservice performs properly
 4/30/21:
 Michael: meeting with professor went well. He approves and we are done other than adding more aesthetic views
+William: Meeting with professor, change aesthetics of webservice
 5/5/21:
 Michael: work on final report testing part. Work on ceo report
+William: Work on Final Report and Presentations
