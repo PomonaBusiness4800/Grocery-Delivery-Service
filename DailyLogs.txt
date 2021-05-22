@@ -27,17 +27,20 @@ Michael: decided on AWS. Research SRS examples to begin building SRS document
 Jorge: Looked at SRS examples
 Sisian: Researched bout web hosting service. I will research about SRS online example. 
 William: Looked at SRS and deciding what to work on
+Jackie: Looked into SRS document examples and researched about web hosting
 2/22/21
 Michael: Created srs doc to work on. discusses which parts to work on. I will do intended audience
 Jorge: Began focusing on Functional Requirements section of SRS
 Sisian: Reaserch about non-functional requirements for SRS document. I will write non-functional requirements.
 William: Continued to work on SRS, worked on Introduction and Intended Audience portion of SRS
+Jackie: Researched functional and non-functional requitements for SRS document
 
 2/23/21
 Michael: Added to intended audience and look for more sections to add and refine srs document.
 Jorge: Wrote first draft of Functional Requirements section of SRS
 Sisian: Wrote some non-functional requirements. I will add more non-functional requirements.
 William: Continued to work on SRS, worked on Introduction and Intended Audience portion of SRS, will look at working on other portions of SRS
+Jackie: Added to non-functional requirements
 
 2/24/21
 Michael: Added scope to SRS. For next meeting gonna work on approach and connecting technologies together. 
@@ -50,6 +53,7 @@ William: Continued to work on SRS, and added to other portions of the document
 2/26/21:
 Michael: Will look into mySQL and try to start up server. Will also try and connect technologies. Research EER and relational models
 William: Researched on Technologies on how it works, trying to figure out tech stack
+Jackie: Looked into which technologies and tech stacks work together 
 
 3/1/21
 Michael: Set up mysql with django and AWS hosting for the database. Will start adding entities and attributes to doc for tomorrow.
@@ -62,6 +66,7 @@ William:Added entities to google doc, will also add attributes today and tomorro
 3/3/21: 
 Michael: Will use the models to create the tables in the database.
 William:Worked on EER and relational models, start by creating the model in the database, Will link entities on mySQL
+Jackie: Added information regarding relational model on doc
 
 3/4/21
 Michael: The tables are created in the database. Mock data will be created for the tables.
@@ -73,6 +78,7 @@ William: Worked on EER and relational models, add data to database
 3/8/21
 Michael: continue to add data into database. Will upload framework code to simulate web service on github.
 William: Added items to database, linked entities to present
+Jackie: Added more mock data into database
 3/9/21
 Michael: Added code for framework onto github and showed how to run it on virtual environment. For next meeting, will look into how to pull data from the databases onto the webpage
 William: Added more tables into the database including items, will work on adding more to data base tomorrow and finish part of the models
@@ -88,10 +94,12 @@ William: started to work on mock storeview using HTML and some bootstrap, implem
 3/15/21:
 Michael: work on ccount creation for users, store view html creations.
 William: Continued to work on mock storeview using HTML, set up basic layout using divs
+Jackie: Attempt to work on storeview to make it look cleaner
 3/16/21: no meeting
 3/17/2021:
 Michael: fix database, continue login/account creation. maybe store list
 William: working on storeview, changed to vons, included storeview pictures
+Jackie: added more items into database
 
 3/18/2021
 Michael: finished login/account creation. 
@@ -125,6 +133,7 @@ William: Added more grocery items to the tables in mySQL
 4/7/21
 Michael: add orderitem as an object into the database to be able to add items to cart.
 William: Fixed issue with connecting to virtual enviroment, will start adding pages to the webservice including designing horizontal logo into navbar.
+Jackie: added additional images to match items in storeviews
 4/8/21
 Michael: finished first part of cart, items are displayed
 William: Trying to implement carousel, but not functional yet, will work on it more this weekend.
@@ -146,11 +155,13 @@ William: made dropdown for accounts on navbar linking to account.html, changed c
 4/16/21:
 Michael: will work on orders page. Add to cart for every store.
 William: made dropdown for accounts on navbar, changed coloring of it, will continue to work on navbar
+Jackie: look into new wixsite because can't access previous site
 4/19/21:
 Michael: will work on orders page. add to cart for every store is done except the two new stores. Will complete the two new stores. new more items in some stores
 4/20/21:
 Michael: orders page added. need to do orders status. will configure last two stores.
 William: Finished improvements to navbar, implemented it into all stores, navbar has items to the right of the page, new logo, and better functionality
+Jackie: finished new wixsite and added daily meetings to bottom of page
 4/21/21:
 Michael: orders page have statuses. just need to figure how status will work. will configure last two stores
 William: Cleaned up files, added food4less and elsuper, removed carousel snippet
@@ -160,6 +171,7 @@ William: Added items to new store, will work on the look of the log in page.
 4/23/21:
 Michael: work on orders statuses with timers and step by step order statuses. Add create account on login. make login page look better
 William: Changed elements of login, erased previous login page and made a new one with bootstrap
+Jackie: Added github link and website link to wixsite and added images to match
 4/26/21:
 Michael: order statuses for orders. and maybe make account creation look better
 William: Changed Account html to look better, added better colors/new format
@@ -172,9 +184,11 @@ William: Cleaned up Files for presentation and submission, deleted and got rid o
 4/29/21:
 Michael: finished orders and service seems to be finished, Just work on some aesthetic views
 William: Testing to make sure the webservice performs properly
+Jackie: Tested some use cases to see if application worked as intended
 4/30/21:
 Michael: meeting with professor went well. He approves and we are done other than adding more aesthetic views
 William: Meeting with professor, change aesthetics of webservice
 5/5/21:
 Michael: work on final report testing part. Work on ceo report
 William: Work on Final Report and Presentations
+Jackie: Work on final report and presenation
